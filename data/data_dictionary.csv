@@ -1,0 +1,29 @@
+csv_file,column_name,data_type,unit,definition,website_section
+company_master.csv,company_id,String,Identifier,"Unique uppercase ticker code identifying institution (e.g., ICICIBANK, BAJFINANCE).",Company Profiles
+company_master.csv,category,String,Category,Institutional classification: Bank or NBFC.,Company Profiles
+company_master.csv,sub_category,String,Sub-category,"Specific regulatory tier (e.g. Private Sector Bank, NBFC-Upper Layer).",Company Profiles
+historical_financials.csv,financial_year,String,Year,Indian financial year ending March 31 (FY15 to FY25).,Historical Financials
+historical_financials.csv,total_assets,Float,INR Crores,Total balance sheet asset size as reported in audited financial statements.,Historical Financials
+historical_financials.csv,advances,Float,INR Crores,Total gross loans and advances outstanding.,Historical Financials
+historical_financials.csv,deposits,Float,INR Crores,Total customer deposits for commercial banks (Demand + Savings + Term).,Historical Financials
+historical_financials.csv,borrowings,Float,INR Crores,Total debt borrowings and debentures issued for NBFCs.,Historical Financials
+historical_financials.csv,aum,Float,INR Crores,Assets Under Management including off-book securitized/assigned loan pools for NBFCs.,Historical Financials
+historical_financials.csv,nii,Float,INR Crores,Net Interest Income: Interest Earned minus Interest Expended.,Historical Financials
+historical_financials.csv,ppop,Float,INR Crores,Pre-Provision Operating Profit (Operating profit before credit provisions).,Historical Financials
+historical_financials.csv,pat,Float,INR Crores,Profit After Tax (Net Profit) attributable to equity shareholders.,Historical Financials
+credit_risk_metrics.csv,gnpa_amount,Float,INR Crores,Gross Non-Performing Assets (or Gross Stage 3 for NBFCs) quantum.,Credit Risk Analysis
+credit_risk_metrics.csv,gnpa_pct,Float,Percentage (%),Gross NPA as percentage of gross advances (or Gross Stage 3 % of loan book).,Credit Risk Analysis
+credit_risk_metrics.csv,nnpa_pct,Float,Percentage (%),Net NPA as percentage of net advances after specific provisioning deductions.,Credit Risk Analysis
+credit_risk_metrics.csv,pcr_pct,Float,Percentage (%),Provision Coverage Ratio: Cumulative provisions held divided by Gross NPA.,Credit Risk Analysis
+credit_risk_metrics.csv,credit_cost_pct,Float,Percentage (%),Annual loan loss provisioning charge divided by average total advances.,Credit Risk Analysis
+capital_adequacy.csv,crar_pct,Float,Percentage (%),Capital to Risk-Weighted Assets Ratio (Basel III / RBI SBR framework).,Historical Financials
+capital_adequacy.csv,cet1_pct,Float,Percentage (%),Common Equity Tier 1 capital ratio (Banks).,Historical Financials
+dpd_analysis.csv,account_count,Integer,Count,Number of borrower accounts residing within specific DPD delinquency bucket.,Credit Risk Modelling
+pd_model_results.csv,odds_ratio,Float,Ratio,Exponentiated logistic regression coefficient exp(beta).,Credit Risk Modelling
+lgd_analysis.csv,cumulative_recovery_rate_pct,Float,Percentage (%),Cumulative cash recoveries divided by balance at default at Month t.,Credit Risk Modelling
+unexpected_loss.csv,worst_case_stressed_pd,Float,Probability,"Vasicek 99.9% conditional default probability under 1-in-1,000 year macro shock.",Credit Risk Modelling
+market_risk_metrics.csv,annualized_volatility_pct,Float,Percentage (%),Daily standard deviation scaled by square root of 252 trading days.,Market Risk Analysis
+var_results.csv,hist_var_99_1d_pct,Float,Percentage (%),1-day 99% confidence Historical Value at Risk expressed as positive percentage loss.,Market Risk Analysis
+var_backtesting.csv,basel_traffic_light_zone,String,Category,Regulatory zone classification based on 99% VaR exception rate (Green / Yellow / Red).,Market Risk Analysis
+event_study_results.csv,car_minus1_plus1_pct,Float,Percentage (%),"Cumulative Abnormal Return across 3-day announcement window [-1, +1] around event.",Event Study
+hypothesis_testing.csv,p_value,Float,Probability,Exact statistical significance p-value of the test statistic.,Hypothesis Testing
