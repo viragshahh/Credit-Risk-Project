@@ -1,0 +1,12 @@
+instrument,testing_period,trading_days_evaluated,exceptions_99pct,expected_exceptions_99pct,failure_rate_99pct,kupiec_lr_stat_99pct,kupiec_p_value_99pct,kupiec_test_result_99pct,basel_traffic_light_zone,exceptions_95pct,expected_exceptions_95pct,failure_rate_95pct,kupiec_lr_stat_95pct,kupiec_p_value_95pct
+ICICI Bank,2020-04-01 to 2025-03-31,1237,10,12.4,0.81,0.491,0.4836,Pass (Fail to Reject H0),Green (Model Accepted),55,61.9,4.45,0.828,0.3628
+HDFC Bank,2020-04-01 to 2025-03-31,1237,8,12.4,0.65,1.782,0.1819,Pass (Fail to Reject H0),Green (Model Accepted),59,61.9,4.77,0.14,0.708
+Axis Bank,2020-04-01 to 2025-03-31,1237,10,12.4,0.81,0.491,0.4836,Pass (Fail to Reject H0),Green (Model Accepted),52,61.9,4.2,1.742,0.1869
+Kotak Mahindra Bank,2020-04-01 to 2025-03-31,1237,10,12.4,0.81,0.491,0.4836,Pass (Fail to Reject H0),Green (Model Accepted),59,61.9,4.77,0.14,0.708
+Bajaj Finance,2020-04-01 to 2025-03-31,1237,13,12.4,1.05,0.032,0.8583,Pass (Fail to Reject H0),Green (Model Accepted),54,61.9,4.37,1.094,0.2957
+Shriram Finance,2020-04-01 to 2025-03-31,1237,12,12.4,0.97,0.011,0.9154,Pass (Fail to Reject H0),Green (Model Accepted),58,61.9,4.69,0.257,0.6119
+Cholamandalam Finance,2020-04-01 to 2025-03-31,1237,13,12.4,1.05,0.032,0.8583,Pass (Fail to Reject H0),Green (Model Accepted),63,61.9,5.09,0.022,0.8811
+Mahindra Finance,2020-04-01 to 2025-03-31,1237,10,12.4,0.81,0.491,0.4836,Pass (Fail to Reject H0),Green (Model Accepted),54,61.9,4.37,1.094,0.2957
+Nifty 50,2020-04-01 to 2025-03-31,1237,10,12.4,0.81,0.491,0.4836,Pass (Fail to Reject H0),Green (Model Accepted),56,61.9,4.53,0.601,0.4383
+Nifty Bank,2020-04-01 to 2025-03-31,1237,7,12.4,0.57,2.792,0.0947,Pass (Fail to Reject H0),Green (Model Accepted),56,61.9,4.53,0.601,0.4383
+Nifty Fin Service,2020-04-01 to 2025-03-31,1237,9,12.4,0.73,1.024,0.3115,Pass (Fail to Reject H0),Green (Model Accepted),49,61.9,3.96,3.017,0.0824
