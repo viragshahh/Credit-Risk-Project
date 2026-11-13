@@ -1,0 +1,7 @@
+segment_type,segment_name,account_count,drawn_balance_inr,committed_loan_amount_inr,undrawn_limit_inr,credit_conversion_factor_ccf,estimated_ead_inr,ead_share_pct,average_ead_per_account_inr
+Credit Bureau Score Band,<650,412,78875020,148193000,69317980,0.2,92738616.0,9.96,225093.73
+Credit Bureau Score Band,650-699,1078,207538020,397659000,190120980,0.2,245562216.0,26.37,227794.26
+Credit Bureau Score Band,700-749,1763,318336183,628556000,310219817,0.2,380380146.4,40.85,215757.32
+Credit Bureau Score Band,750+,1747,326460794,650921000,324460206,0.2,391352835.2,42.03,224014.22
+Employment Type,Salaried,3493,660318076,1287105000,626786924,0.2,785675460.8,84.37,224928.56
+Employment Type,Self-employed,1507,270891941,538224000,267332059,0.2,324358352.8,34.83,215234.47
