@@ -1114,54 +1114,57 @@ Ashi Jain</textarea>
       const history = (DATA.historical_financials || []).filter(r => r.company_id === cid);
       const master = (DATA.company_master || []).find(r => r.company_id === cid) || {};
 
-      // Profile banner
+      // Profile banner — use actual CSV column names: category, nse_symbol, bse_code, regulatory_regime
+      const isBank = master.category === 'Bank';
       const banner = document.getElementById('company-profile-banner');
       banner.innerHTML = `
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div class="flex items-center space-x-2">
-              <span class="px-2.5 py-0.5 rounded text-[11px] font-bold ${master.institution_type === 'Bank' ? 'bg-blue-500/20 text-blue-300' : 'bg-orange-500/20 text-orange-300'}">${master.institution_type}</span>
-              <span class="text-xs text-slate-400 font-mono">${master.nse_ticker} | BSE: ${master.bse_code}</span>
+              <span class="px-2.5 py-0.5 rounded text-[11px] font-bold ${isBank ? 'bg-blue-500/20 text-blue-300' : 'bg-orange-500/20 text-orange-300'}">${master.sub_category || master.category}</span>
+              <span class="text-xs text-slate-400 font-mono">NSE: ${master.nse_symbol} | BSE: ${master.bse_code}</span>
             </div>
             <h3 class="text-2xl font-bold text-white mt-1">${master.company_name}</h3>
-            <p class="text-xs text-slate-400 mt-0.5">Auditor: ${master.primary_auditor} | Regulated by: ${master.regulator}</p>
+            <p class="text-xs text-slate-400 mt-0.5">HQ: ${master.headquarters} | Regulator: ${master.regulatory_regime}</p>
+            <p class="text-xs text-slate-500 mt-1">${master.description || ''}</p>
           </div>
           <div class="flex items-center space-x-3 text-right">
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
-              <span class="text-[10px] text-slate-400 block uppercase">Credit Rating</span>
-              <span class="text-sm font-bold text-emerald-400">${master.credit_rating_current}</span>
+              <span class="text-[10px] text-slate-400 block uppercase">Accounting Standard</span>
+              <span class="text-sm font-bold text-emerald-400">${master.accounting_standard}</span>
             </div>
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
-              <span class="text-[10px] text-slate-400 block uppercase">10-Yr CAGR</span>
-              <span class="text-sm font-bold text-indigo-400">${master.institution_type === 'Bank' ? '14.2%' : '28.6%'}</span>
+              <span class="text-[10px] text-slate-400 block uppercase">Role in Study</span>
+              <span class="text-sm font-bold text-indigo-400">${master.role_in_study}</span>
             </div>
           </div>
         </div>
       `;
 
-      // Financials table
+      // Financials table — actual columns: advances, aum, pat, gnpa_amount, gnpa_pct, nnpa_pct, pcr_pct, crar_pct, tier1_pct
       const tbody = document.getElementById('company-financials-body');
       tbody.innerHTML = '';
       history.forEach(r => {
+        const advAum = r.advances || r.aum || 0;
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 transition";
         tr.innerHTML = `
           <td class="px-3 py-2 font-bold text-white">${r.financial_year}</td>
           <td class="px-3 py-2 font-mono">${(r.total_assets || 0).toLocaleString()}</td>
-          <td class="px-3 py-2 font-mono">${(r.advances_or_aum || 0).toLocaleString()}</td>
-          <td class="px-3 py-2 font-mono text-emerald-400">${(r.net_profit || 0).toLocaleString()}</td>
+          <td class="px-3 py-2 font-mono">${advAum.toLocaleString()}</td>
+          <td class="px-3 py-2 font-mono text-emerald-400">${(r.pat || 0).toLocaleString()}</td>
           <td class="px-3 py-2 font-mono">${(r.gnpa_amount || 0).toLocaleString()}</td>
           <td class="px-3 py-2 font-bold ${r.gnpa_pct > 5 ? 'text-rose-400' : 'text-emerald-400'}">${r.gnpa_pct}%</td>
           <td class="px-3 py-2 font-mono">${r.nnpa_pct}%</td>
           <td class="px-3 py-2 font-mono text-indigo-400">${r.pcr_pct}%</td>
           <td class="px-3 py-2 font-mono">${r.crar_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.tier_1_crar_pct}%</td>
+          <td class="px-3 py-2 font-mono">${r.tier1_pct}%</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // Peer Matrix (FY25)
+    // Peer Matrix (FY25) — actual column: pat (not net_profit), tier1_pct (not tier_1_pct)
     function renderPeerMatrix() {
       const peers = (DATA.peer_comparison || []).filter(r => r.financial_year === 'FY25');
       const tbody = document.getElementById('peer-matrix-body');
@@ -1169,23 +1172,24 @@ Ashi Jain</textarea>
       peers.forEach(r => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 transition";
+        const isBank = r.peer_group === 'Banking';
         tr.innerHTML = `
           <td class="px-3 py-2.5 font-bold text-white">${r.company_name}</td>
-          <td class="px-3 py-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${r.peer_group.includes('Bank') ? 'bg-blue-500/20 text-blue-300' : 'bg-orange-500/20 text-orange-300'}">${r.peer_group}</span></td>
+          <td class="px-3 py-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${isBank ? 'bg-blue-500/20 text-blue-300' : 'bg-orange-500/20 text-orange-300'}">${r.peer_group}</span></td>
           <td class="px-3 py-2.5 font-mono">₹${(r.advances || 0).toLocaleString()} Cr</td>
-          <td class="px-3 py-2.5 font-mono text-emerald-400">₹${(r.net_profit || 0).toLocaleString()} Cr</td>
+          <td class="px-3 py-2.5 font-mono text-emerald-400">₹${(r.pat || 0).toLocaleString()} Cr</td>
           <td class="px-3 py-2.5 font-bold ${r.gnpa_pct > 3 ? 'text-rose-400' : 'text-emerald-400'}">${r.gnpa_pct}%</td>
           <td class="px-3 py-2.5 font-mono">${r.nnpa_pct}%</td>
           <td class="px-3 py-2.5 font-mono text-indigo-400">${r.pcr_pct}%</td>
           <td class="px-3 py-2.5 font-mono">${r.credit_cost_pct}%</td>
           <td class="px-3 py-2.5 font-mono font-bold">${r.crar_pct}%</td>
-          <td class="px-3 py-2.5 font-mono">${r.tier_1_pct}%</td>
+          <td class="px-3 py-2.5 font-mono">${r.tier1_pct}%</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // Tab 3: DPD & Credit Lab
+    // Tab 3: DPD — actual columns include default_rate_pct, average_bureau_score instead of regulatory_classification
     function renderDPD() {
       const dpd = DATA.dpd_analysis || [];
       const tbody = document.getElementById('dpd-table-body');
@@ -1195,14 +1199,16 @@ Ashi Jain</textarea>
       dpd.forEach(r => {
         labels.push(r.dpd_bucket);
         counts.push(r.account_count);
+        const isStandard = r.dpd_bucket === '0 DPD' || r.dpd_bucket === '1-30 DPD';
+        const statusLabel = isStandard ? 'Standard Asset' : (r.dpd_bucket.includes('90') ? 'NPA / Substandard' : 'Special Mention');
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td class="px-3 py-2 font-bold text-white">${r.dpd_bucket}</td>
           <td class="px-3 py-2 font-mono">${r.account_count.toLocaleString()}</td>
           <td class="px-3 py-2 font-mono">${r.account_share_pct}%</td>
-          <td class="px-3 py-2 font-mono">₹${(r.outstanding_balance_inr / 1e7).toFixed(2)}</td>
+          <td class="px-3 py-2 font-mono">₹${(r.outstanding_balance_inr / 1e7).toFixed(2)} Cr</td>
           <td class="px-3 py-2 font-mono">${r.balance_share_pct}%</td>
-          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${r.regulatory_classification.includes('Standard') ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${r.regulatory_classification}</span></td>
+          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${isStandard ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${statusLabel}</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1273,14 +1279,14 @@ Ashi Jain</textarea>
       }
     }
 
-    // LGD Curve
+    // LGD Curve — actual columns: month_post_default, cumulative_recovery_rate_pct, undiscounted_lgd_pct
     function renderLGD() {
       const lgd = DATA.lgd_analysis || [];
       const ctx = document.getElementById('chart-lgd-curve');
       if (ctx) {
-        const labels = lgd.map(r => 'M' + r.month);
-        const rec = lgd.map(r => r.cumulative_recovery_pct);
-        const lgd_vals = lgd.map(r => r.nominal_lgd_pct);
+        const labels = lgd.map(r => 'M' + r.month_post_default);
+        const rec = lgd.map(r => r.cumulative_recovery_rate_pct);
+        const lgd_vals = lgd.map(r => r.undiscounted_lgd_pct);
         new Chart(ctx, {
           type: 'line',
           data: {
@@ -1316,7 +1322,7 @@ Ashi Jain</textarea>
       }
     }
 
-    // ECL Staging
+    // ECL Staging — actual columns: stage, horizon, ead_inr, scenario_pd, scenario_lgd, ecl_amount_inr
     function renderECL() {
       const ecl = DATA.ecl_scenarios || [];
       const baseEcl = ecl.filter(r => r.scenario === 'Base');
@@ -1325,38 +1331,37 @@ Ashi Jain</textarea>
       baseEcl.forEach(r => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="px-3 py-2 font-bold text-white">${r.staging_bucket}</td>
-          <td class="px-3 py-2 font-mono">₹${r.exposure_at_default_inr_cr}</td>
-          <td class="px-3 py-2 font-mono">${r.time_horizon}</td>
-          <td class="px-3 py-2 font-mono">${r.effective_pd_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.lgd_pct}%</td>
-          <td class="px-3 py-2 font-bold text-emerald-400">₹${r.ecl_inr_cr}</td>
+          <td class="px-3 py-2 font-bold text-white">${r.stage}</td>
+          <td class="px-3 py-2 font-mono">₹${(r.ead_inr / 1e7).toFixed(2)} Cr</td>
+          <td class="px-3 py-2 font-mono">${r.horizon}</td>
+          <td class="px-3 py-2 font-mono">${(r.scenario_pd * 100).toFixed(2)}%</td>
+          <td class="px-3 py-2 font-mono">${(r.scenario_lgd * 100).toFixed(2)}%</td>
+          <td class="px-3 py-2 font-bold text-emerald-400">₹${(r.ecl_amount_inr / 1e7).toFixed(4)} Cr</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // Tab 4: Vasicek Simulation
+    // Tab 4: Vasicek Simulation — actual columns: unexpected_loss_irb_capital_inr, standardized_capital_requirement_inr, irb_capital_ratio_pct
     function renderVasicekTable() {
       const ul = DATA.unexpected_loss || [];
       const tbody = document.getElementById('vasicek-table-body');
       tbody.innerHTML = '';
       ul.forEach(r => {
         const tr = document.createElement('tr');
-        const k_pct = (r.capital_requirement_k * 100).toFixed(2);
-        const irb_cr = (r.regulatory_capital_irb_inr / 1e7).toFixed(2);
-        const std_cr = (r.standardized_capital_inr / 1e7).toFixed(2);
-        const delta = ((irb_cr / std_cr - 1) * 100).toFixed(1);
+        const irb_cr = (r.unexpected_loss_irb_capital_inr / 1e7).toFixed(2);
+        const std_cr = (r.standardized_capital_requirement_inr / 1e7).toFixed(2);
+        const delta = std_cr > 0 ? ((irb_cr / std_cr - 1) * 100).toFixed(1) : 0;
         tr.innerHTML = `
           <td class="px-3 py-2.5 font-bold text-white">${r.asset_class}</td>
-          <td class="px-3 py-2.5 font-mono">₹${(r.ead_inr / 1e7).toFixed(2)}</td>
+          <td class="px-3 py-2.5 font-mono">₹${(r.ead_inr / 1e7).toFixed(2)} Cr</td>
           <td class="px-3 py-2.5 font-mono">${(r.regular_pd * 100).toFixed(2)}%</td>
           <td class="px-3 py-2.5 font-mono">${(r.lgd * 100).toFixed(2)}%</td>
           <td class="px-3 py-2.5 font-mono">${r.regulatory_correlation_rho}</td>
-          <td class="px-3 py-2.5 font-mono text-indigo-400 font-bold">${k_pct}%</td>
-          <td class="px-3 py-2.5 font-bold text-white">₹${irb_cr}</td>
-          <td class="px-3 py-2.5 font-mono text-slate-400">₹${std_cr}</td>
-          <td class="px-3 py-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${delta > 0 ? 'bg-rose-500/20 text-rose-300' : 'bg-emerald-500/20 text-emerald-300'}">${delta > 0 ? '+' + delta : delta}%</span></td>
+          <td class="px-3 py-2.5 font-mono text-indigo-400 font-bold">${r.irb_capital_ratio_pct}%</td>
+          <td class="px-3 py-2.5 font-bold text-white">₹${irb_cr} Cr</td>
+          <td class="px-3 py-2.5 font-mono text-slate-400">₹${std_cr} Cr</td>
+          <td class="px-3 py-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${delta < 0 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300'}">${delta > 0 ? '+' + delta : delta}%</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1408,24 +1413,28 @@ Ashi Jain</textarea>
       document.getElementById('vasicek-sim-delta').innerText = `+${delta}% above Standardized`;
     }
 
-    // Tab 5: VaR & Backtesting
+    // Tab 5: VaR & Backtesting — actual columns from var_results & market_risk_metrics CSVs
     function renderVaR() {
+      // var_results has: param_var_99_1d_pct, hist_var_99_1d_pct, mc_var_99_1d_pct, expected_shortfall_99_1d_pct
+      // market_risk_metrics has: annualized_return_pct, annualized_volatility_pct, maximum_drawdown_pct, sharpe_ratio
       const varData = DATA.var_results || [];
+      const mktData = DATA.market_risk_metrics || [];
       const tbody = document.getElementById('var-table-body');
       tbody.innerHTML = '';
       varData.forEach(r => {
+        const mkt = mktData.find(m => m.instrument === r.instrument) || {};
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td class="px-3 py-2.5 font-bold text-white">${r.instrument}</td>
           <td class="px-3 py-2.5 text-slate-400">${r.category}</td>
-          <td class="px-3 py-2.5 font-mono text-emerald-400">${r.annualized_return_pct}%</td>
-          <td class="px-3 py-2.5 font-mono">${r.annualized_volatility_pct}%</td>
+          <td class="px-3 py-2.5 font-mono text-emerald-400">${mkt.annualized_return_pct || '-'}%</td>
+          <td class="px-3 py-2.5 font-mono">${mkt.annualized_volatility_pct || '-'}%</td>
           <td class="px-3 py-2.5 font-mono text-rose-400 font-bold">${r.param_var_99_1d_pct}%</td>
           <td class="px-3 py-2.5 font-mono">${r.hist_var_99_1d_pct}%</td>
           <td class="px-3 py-2.5 font-mono">${r.mc_var_99_1d_pct}%</td>
           <td class="px-3 py-2.5 font-mono text-rose-300">${r.expected_shortfall_99_1d_pct}%</td>
-          <td class="px-3 py-2.5 font-mono text-slate-400">${r.max_drawdown_pct}%</td>
-          <td class="px-3 py-2.5 font-mono text-indigo-400">${r.sharpe_ratio}</td>
+          <td class="px-3 py-2.5 font-mono text-slate-400">${mkt.maximum_drawdown_pct || '-'}%</td>
+          <td class="px-3 py-2.5 font-mono text-indigo-400">${mkt.sharpe_ratio || '-'}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -1458,54 +1467,63 @@ Ashi Jain</textarea>
       }
     }
 
+    // Backtesting — actual columns: failure_rate_99pct, kupiec_lr_stat_99pct, kupiec_p_value_99pct
     function renderBacktesting() {
       const bt = DATA.var_backtesting || [];
       const tbody = document.getElementById('backtesting-table-body');
       tbody.innerHTML = '';
       bt.forEach(r => {
+        const zone = r.basel_traffic_light_zone || 'Green (Model Accepted)';
+        const isGreen = zone.toLowerCase().includes('green');
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td class="px-3 py-2 font-bold text-white">${r.instrument}</td>
           <td class="px-3 py-2 font-mono">${r.trading_days_evaluated}</td>
           <td class="px-3 py-2 font-mono font-bold ${r.exceptions_99pct > 4 ? 'text-amber-400' : 'text-emerald-400'}">${r.exceptions_99pct}</td>
           <td class="px-3 py-2 font-mono text-slate-400">${r.expected_exceptions_99pct}</td>
-          <td class="px-3 py-2 font-mono">${r.failure_rate_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.lr_pof_statistic}</td>
-          <td class="px-3 py-2 font-mono">${r.p_value}</td>
-          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">GREEN ZONE</span></td>
+          <td class="px-3 py-2 font-mono">${r.failure_rate_99pct}%</td>
+          <td class="px-3 py-2 font-mono">${r.kupiec_lr_stat_99pct}</td>
+          <td class="px-3 py-2 font-mono">${r.kupiec_p_value_99pct}</td>
+          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${isGreen ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${zone}</span></td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // Tab 6: Events
+    // Tab 6: Events — actual columns: announcement_date (not event_date), no icici_car_3d/bajaj_car_3d/market_impact in event_database
+    // Those CARs come from event_study_results
     let eventChartInstance = null;
     function renderEvents() {
       const events = DATA.event_database || [];
+      const evResults = DATA.event_study_results || [];
       const sel = document.getElementById('event-select');
       sel.innerHTML = '';
       events.forEach(e => {
         const opt = document.createElement('option');
         opt.value = e.event_id;
-        opt.innerText = `${e.event_date} - ${e.event_name}`;
+        opt.innerText = `${e.announcement_date} — ${e.event_name}`;
         sel.appendChild(opt);
       });
 
-      // Table
+      // Table — pull ICICI & Bajaj CARs from event_study_results
       const tbody = document.getElementById('event-table-body');
       tbody.innerHTML = '';
       events.forEach(e => {
+        const iciciRow = evResults.find(r => r.event_id === e.event_id && r.institution === 'ICICI Bank') || {};
+        const bajajRow = evResults.find(r => r.event_id === e.event_id && r.institution === 'Bajaj Finance') || {};
+        const icicCar = iciciRow.car_minus1_plus1_pct;
+        const bajajCar = bajajRow.car_minus1_plus1_pct;
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 cursor-pointer transition";
         tr.onclick = () => { sel.value = e.event_id; renderEventDetail(); };
         tr.innerHTML = `
           <td class="px-3 py-2 font-bold text-indigo-400">${e.event_id}</td>
-          <td class="px-3 py-2 font-mono">${e.event_date}</td>
+          <td class="px-3 py-2 font-mono">${e.announcement_date}</td>
           <td class="px-3 py-2 font-semibold text-white">${e.event_name}</td>
           <td class="px-3 py-2 text-slate-400">${e.event_category}</td>
-          <td class="px-3 py-2 font-mono font-bold ${e.icici_car_3d < 0 ? 'text-rose-400' : 'text-emerald-400'}">${e.icici_car_3d}%</td>
-          <td class="px-3 py-2 font-mono font-bold ${e.bajaj_car_3d < 0 ? 'text-rose-400' : 'text-emerald-400'}">${e.bajaj_car_3d}%</td>
-          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-semibold ${e.market_impact === 'Severe Negative' ? 'bg-rose-500/20 text-rose-300' : 'bg-slate-800 text-slate-300'}">${e.market_impact}</span></td>
+          <td class="px-3 py-2 font-mono font-bold ${icicCar < 0 ? 'text-rose-400' : 'text-emerald-400'}">${icicCar != null ? icicCar + '%' : '—'}</td>
+          <td class="px-3 py-2 font-mono font-bold ${bajajCar < 0 ? 'text-rose-400' : 'text-emerald-400'}">${bajajCar != null ? bajajCar + '%' : '—'}</td>
+          <td class="px-3 py-2"><span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300">${e.risk_category}</span></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1516,35 +1534,42 @@ Ashi Jain</textarea>
     function renderEventDetail() {
       const eid = document.getElementById('event-select').value;
       const ev = (DATA.event_database || []).find(e => e.event_id === eid) || {};
+      const evResults = (DATA.event_study_results || []).filter(r => r.event_id === eid);
+      const iciciRow = evResults.find(r => r.institution === 'ICICI Bank') || {};
+      const bajajRow = evResults.find(r => r.institution === 'Bajaj Finance') || {};
+      const icicCar = iciciRow.car_minus1_plus1_pct;
+      const bajajCar = bajajRow.car_minus1_plus1_pct;
+
       const banner = document.getElementById('event-detail-banner');
       banner.innerHTML = `
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div class="flex items-center space-x-2">
               <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-xs font-bold">${ev.event_category}</span>
-              <span class="text-xs text-slate-400 font-mono">${ev.event_date}</span>
+              <span class="text-xs text-slate-400 font-mono">${ev.announcement_date}</span>
+              <span class="text-xs text-slate-500">${ev.risk_category}</span>
             </div>
             <h3 class="text-xl font-bold text-white mt-1">${ev.event_name}</h3>
             <p class="text-xs text-slate-300 mt-2 max-w-3xl leading-relaxed">${ev.description}</p>
+            <p class="text-xs text-slate-500 mt-1 italic">${ev.risk_transmission_channel || ''}</p>
           </div>
           <div class="flex sm:flex-col gap-2 text-right">
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
               <span class="text-[10px] text-slate-400 block uppercase">ICICI CAR[-1,+1]</span>
-              <span class="text-sm font-bold ${ev.icici_car_3d < 0 ? 'text-rose-400' : 'text-emerald-400'}">${ev.icici_car_3d}%</span>
+              <span class="text-sm font-bold ${icicCar < 0 ? 'text-rose-400' : 'text-emerald-400'}">${icicCar != null ? icicCar + '%' : '—'}</span>
             </div>
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
               <span class="text-[10px] text-slate-400 block uppercase">Bajaj CAR[-1,+1]</span>
-              <span class="text-sm font-bold ${ev.bajaj_car_3d < 0 ? 'text-rose-400' : 'text-emerald-400'}">${ev.bajaj_car_3d}%</span>
+              <span class="text-sm font-bold ${bajajCar < 0 ? 'text-rose-400' : 'text-emerald-400'}">${bajajCar != null ? bajajCar + '%' : '—'}</span>
             </div>
           </div>
         </div>
       `;
 
-      // Chart
-      const evResults = (DATA.event_study_results || []).filter(r => r.event_id === eid);
-      const labels = evResults.map(r => r.instrument);
-      const car3 = evResults.map(r => r.car_3d_pct);
-      const car11 = evResults.map(r => r.car_11d_pct);
+      // Chart — use actual column names car_minus1_plus1_pct and car_minus5_plus5_pct
+      const labels = evResults.map(r => r.institution);
+      const car3 = evResults.map(r => r.car_minus1_plus1_pct);
+      const car11 = evResults.map(r => r.car_minus5_plus5_pct);
 
       document.getElementById('event-chart-title').innerText = `Cumulative Abnormal Returns (CAR) for ${ev.event_name}`;
 
@@ -1573,7 +1598,7 @@ Ashi Jain</textarea>
       }
     }
 
-    // Tab 7: Hypotheses
+    // Tab 7: Hypotheses — actual columns: decision (not statistical_decision), test_statistic (not test_statistic_value), financial_interpretation (not economic_interpretation)
     function renderHypotheses() {
       const hyps = DATA.hypothesis_testing || [];
       const container = document.getElementById('hypotheses-cards-container');
@@ -1588,7 +1613,7 @@ Ashi Jain</textarea>
               <span>${h.hypothesis_title}</span>
             </h4>
             <div class="flex items-center space-x-2">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold text-xs">${h.statistical_decision}</span>
+              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold text-xs">${h.decision}</span>
               <span class="text-xs text-slate-400 font-mono">p = ${h.p_value}</span>
             </div>
           </div>
@@ -1602,9 +1627,10 @@ Ashi Jain</textarea>
               <p class="text-slate-200">${h.alternative_hypothesis}</p>
             </div>
           </div>
-          <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
-            <span>Test: <strong class="text-slate-200">${h.statistical_test_type}</strong> (Test Stat: <strong class="text-slate-200">${h.test_statistic_value}</strong>)</span>
-            <span class="text-slate-300 italic">${h.economic_interpretation}</span>
+          <div class="text-xs text-slate-400 pt-1 space-y-1">
+            <div>Test: <strong class="text-slate-200">${h.statistical_test_type}</strong> &nbsp;|&nbsp; Statistic: <strong class="text-slate-200">${h.test_statistic}</strong> &nbsp;|&nbsp; Sample n = ${h.sample_size_n}</div>
+            <div class="text-slate-300 italic">${h.financial_interpretation}</div>
+            <div class="text-[11px] text-slate-500">Effect Size / Coefficient: ${h.effect_size_or_coefficient || '—'}</div>
           </div>
         `;
         container.appendChild(card);
