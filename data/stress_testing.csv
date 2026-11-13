@@ -1,0 +1,5 @@
+scenario_name,description,stressed_pd_pct,stressed_lgd_pct,portfolio_ead_inr,projected_ecl_inr,additional_ecl_charge_inr,credit_cost_bps,stressed_rwa_inr,post_stress_crar_pct,crar_depletion_bps,capital_adequacy_status
+Baseline (Normal Macro),"Current operating environment: steady GDP growth, stable employment, baseline interest rates.",5.1,67.18,931210017,31906739.0,0.0,150,1164012521.0,14.8,370.0,Compliant (>11.5%)
+Moderate Slowdown,"Economic deceleration, rising retail defaults, 10% lower recovery realizations.",6.63,77.26,931210017,47700576.0,15793836.0,250,1280413773.0,12.22,628.0,Compliant (>11.5%)
+Severe Recession / Stagflation,"Severe GDP contraction, high inflation, surge in unsecured retail delinquencies, 25% lower recoveries.",8.92,90.7,931210017,75379672.0,43472933.0,450,1455015652.0,8.85,965.0,BREACH (<11.5% Minimum CRAR + CCB)
+RBI Unsecured Risk Weight Shock & Liquidity Crunch,"RBI mandates higher risk weights (+25 bps), cost of borrowings spikes +150 bps, elevated slippages in consumer finance.",7.65,83.98,931210017,59825137.0,27918397.0,350,1513216278.0,9.54,896.0,BREACH (<11.5% Minimum CRAR + CCB)
