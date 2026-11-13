@@ -1,0 +1,13 @@
+variable,coefficient,std_error,z_statistic,p_value,odds_ratio,interpretation,metric_type
+const,5.17746,1.33914,3.866,0.000111,177.2315,"Holding other variables constant, 1-unit increase multiplies default odds by 177.2315",Coefficient
+foir,3.28322,0.79245,4.143,3.4e-05,26.6615,"Holding other variables constant, 1-unit increase multiplies default odds by 26.6615",Coefficient
+bureau_score,-0.01466,0.00172,-8.541,0.0,0.9854,"Holding other variables constant, 1-unit increase multiplies default odds by 0.9854",Coefficient
+is_self_employed,0.31215,0.16679,1.872,0.061271,1.3664,"Holding other variables constant, 1-unit increase multiplies default odds by 1.3664",Coefficient
+is_delinquent,1.76486,0.17322,10.189,0.0,5.8407,"Holding other variables constant, 1-unit increase multiplies default odds by 5.8407",Coefficient
+ROC_AUC,0.8597,,,,,Area Under the Receiver Operating Characteristic Curve (Excellence threshold > 0.75),Diagnostic
+Gini_Coefficient,0.7195,,,,,Gini = 2 * AUC - 1 (Strong discriminatory power),Diagnostic
+KS_Statistic,61.7,,,,,Maximum separation between defaulters and non-defaulters cumulative distributions (%),Diagnostic
+Accuracy,0.927,,,,,Classification accuracy on test sample,Diagnostic
+Precision,0.3721,,,,,Share of predicted defaulters who actually defaulted,Diagnostic
+Recall,0.6275,,,,,Share of actual defaulters captured by the model,Diagnostic
+F1_Score,0.4672,,,,,Harmonic mean of precision and recall,Diagnostic
