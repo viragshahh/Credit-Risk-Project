@@ -1,0 +1,13 @@
+stage,horizon,scenario,scenario_weight,account_count,ead_inr,scenario_pd,scenario_lgd,ecl_amount_inr,ecl_coverage_pct
+Stage 1 (Performing),12-Month ECL,Base,0.5,4272,786990680,0.0211,0.6718,11138981.0,1.42
+Stage 1 (Performing),12-Month ECL,Optimistic,0.2,4272,786990680,0.0169,0.6047,8020066.0,1.02
+Stage 1 (Performing),12-Month ECL,Stressed,0.3,4272,786990680,0.0305,0.7726,18574251.0,2.36
+Stage 2 (Underperforming - SICR),Lifetime ECL,Base,0.5,615,121587923,0.4065,0.6718,33206258.0,27.31
+Stage 2 (Underperforming - SICR),Lifetime ECL,Optimistic,0.2,615,121587923,0.3252,0.6047,23908506.0,19.66
+Stage 2 (Underperforming - SICR),Lifetime ECL,Stressed,0.3,615,121587923,0.5894,0.7726,55371436.0,45.54
+Stage 3 (Credit Impaired),Lifetime ECL,Base,0.5,113,22631414,1.0,0.6718,15204646.0,67.18
+Stage 3 (Credit Impaired),Lifetime ECL,Optimistic,0.2,113,22631414,0.8,0.6047,10947345.0,48.37
+Stage 3 (Credit Impaired),Lifetime ECL,Stressed,0.3,113,22631414,1.0,0.7726,17485342.0,77.26
+Stage 1 (Performing),12-Month ECL,Probability-Weighted,1.0,4272,786990680,0.0231,0.6886,12745779.0,1.62
+Stage 2 (Underperforming - SICR),Lifetime ECL,Probability-Weighted,1.0,615,121587923,0.4451,0.6886,37996261.0,31.25
+Stage 3 (Credit Impaired),Lifetime ECL,Probability-Weighted,1.0,113,22631414,0.96,0.6886,15037395.0,66.44
