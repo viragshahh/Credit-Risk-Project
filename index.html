@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FRA Analytics & Risk Lab | ICICI Bank vs Bajaj Finance (FY15–FY25)</title>
+  <title>FRA Risk Analytics & Capstone | Section B - Group 3</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -22,9 +22,7 @@
               800: '#3730a3',
               900: '#312e81',
               950: '#1e1b4b'
-            },
-            bank: '#3b82f6',
-            nbfc: '#f97316'
+            }
           }
         }
       }
@@ -34,13 +32,14 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Embedded Data -->
+  <!-- Embedded Master Data -->
   <script src="data/fra_master_data.js"></script>
   <style>
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .glass-nav { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-    .tab-active { border-bottom: 3px solid #6366f1; color: #a5b4fc !important; font-weight: 600; }
+    .glass-nav { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .tab-active { border-bottom: 3px solid #6366f1; color: #a5b4fc !important; font-weight: 600; background: rgba(99, 102, 241, 0.08); }
+    .callout-box { background: rgba(15, 23, 42, 0.9); border-left: 3px solid #6366f1; }
     /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #0f172a; }
@@ -63,69 +62,50 @@
             <div class="flex items-center space-x-2">
               <span class="text-xs font-bold tracking-widest text-indigo-400 uppercase">PGDM 2025–27</span>
               <span class="text-xs text-slate-500">•</span>
-              <span class="text-xs font-semibold text-slate-400">Prof. Priyadarshi Dutta</span>
+              <span class="text-xs font-semibold text-slate-300">Prof. Priyadarshi Dutta</span>
             </div>
             <h1 class="text-base font-bold text-white tracking-tight">Financial Risk Analytics (FRA) Capstone</h1>
           </div>
         </div>
 
-        <!-- Academic Team Profile & Edit Trigger -->
-        <div class="flex items-center space-x-4">
-          <div id="team-summary-pill" class="hidden md:flex items-center space-x-3 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/60 text-xs">
-            <i data-lucide="users" class="w-4 h-4 text-brand-400"></i>
-            <div>
-              <span id="disp-sec-grp" class="font-bold text-white">Section B | Group 3</span>
-              <span class="text-slate-500 mx-1">•</span>
-              <span id="disp-members-count" class="text-slate-400">5 Members</span>
-            </div>
+        <!-- Academic Team Header Pill -->
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center space-x-2.5 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 text-xs">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-bold text-white">Section B</span>
+            <span class="text-slate-500">•</span>
+            <span class="font-bold text-indigo-400">Group 3</span>
+            <span class="text-slate-500 hidden sm:inline">•</span>
+            <span class="text-slate-300 hidden sm:inline">5 Members</span>
           </div>
-
-          <button onclick="openTeamModal()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/40 text-indigo-200 text-xs font-medium transition shadow-sm">
-            <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-            <span>Team Profile</span>
-          </button>
-
-          <!-- Presentation Slide Toggle -->
-          <button onclick="switchTab('presentation')" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/40 text-emerald-200 text-xs font-semibold transition shadow-sm">
-            <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
-            <span>Presentation Mode</span>
-          </button>
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
-      <nav class="flex space-x-1 sm:space-x-4 overflow-x-auto text-xs sm:text-sm border-t border-slate-800/80 py-2 scrollbar-none" id="nav-tabs">
+      <!-- Navigation Tabs (6 Clean Sections) -->
+      <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto text-xs sm:text-sm border-t border-slate-800/80 py-2 scrollbar-none" id="nav-tabs">
         <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap tab-active">
           <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-          <span>Executive Overview</span>
+          <span>1. Executive Overview</span>
         </button>
         <button onclick="switchTab('institution')" id="tab-institution" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
           <i data-lucide="landmark" class="w-4 h-4"></i>
-          <span>Institutional Benchmarks</span>
+          <span>2. Institutional Benchmarks</span>
         </button>
         <button onclick="switchTab('creditlab')" id="tab-creditlab" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
           <i data-lucide="calculator" class="w-4 h-4"></i>
-          <span>Credit Risk Lab (PD/LGD/ECL)</span>
+          <span>3. Credit Risk Lab (PD/LGD/ECL)</span>
         </button>
         <button onclick="switchTab('capital')" id="tab-capital" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
           <i data-lucide="shield-check" class="w-4 h-4"></i>
-          <span>Vasicek IRB Capital</span>
+          <span>4. Vasicek IRB Capital</span>
         </button>
         <button onclick="switchTab('marketrisk')" id="tab-marketrisk" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
           <i data-lucide="trending-up" class="w-4 h-4"></i>
-          <span>Market Risk & VaR</span>
+          <span>5. Market Risk & VaR</span>
         </button>
         <button onclick="switchTab('eventstudy')" id="tab-eventstudy" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
           <i data-lucide="zap" class="w-4 h-4"></i>
-          <span>Event Study Shocks</span>
-        </button>
-        <button onclick="switchTab('hypotheses')" id="tab-hypotheses" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
-          <i data-lucide="flask-conical" class="w-4 h-4"></i>
-          <span>Hypothesis Testing</span>
-        </button>
-        <button onclick="switchTab('downloads')" id="tab-downloads" class="tab-btn px-3 py-1.5 rounded-md text-slate-400 hover:text-white transition flex items-center space-x-1.5 whitespace-nowrap">
-          <i data-lucide="download" class="w-4 h-4"></i>
-          <span>Data Hub & Report</span>
+          <span>6. Event Study Shocks</span>
         </button>
       </nav>
     </div>
@@ -138,20 +118,53 @@
     <!-- TAB 1: EXECUTIVE OVERVIEW -->
     <!-- ========================================== -->
     <section id="view-overview" class="tab-view space-y-6">
-      <!-- Hero Banner -->
-      <div class="glass-card rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/20 relative overflow-hidden">
-        <div class="relative z-10">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-3">
-            <span>Primary Study: ICICI Bank (Bank) vs. Bajaj Finance (NBFC)</span>
-            <span class="text-indigo-400">•</span>
-            <span>FY2015 – FY2025</span>
+
+      <!-- Academic Group Profile Hero Card -->
+      <div class="glass-card rounded-2xl p-6 sm:p-7 border border-indigo-500/30 bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 relative overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 relative z-10">
+          <div>
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-2.5">
+              <span>Course Capstone Defense</span>
+              <span class="text-indigo-400">•</span>
+              <span>Faculty Evaluator: Prof. Priyadarshi Dutta</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Section B — Group 3 Presentation
+            </h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
+              Comparative Financial Risk Analytics study of <strong>ICICI Bank</strong> vs. <strong>Bajaj Finance</strong> and respective peer groups over the 11-year cycle (FY2015–FY2025).
+            </p>
           </div>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
-            Comparative Financial Risk Analytics & Risk Engine
-          </h2>
-          <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
-            Rigorous empirical evaluation of asset quality transformation, systemic risk propagation, retailization vulnerability, Basel III IRB vs Standardized capital, and 15 major macroeconomic shock events across 8 leading Indian financial institutions.
-          </p>
+
+          <!-- Team Members Roster Badges -->
+          <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-700/80 min-w-[280px]">
+            <span class="text-[11px] font-bold tracking-wider text-slate-400 uppercase block mb-2 flex items-center justify-between">
+              <span>Project Team Roster</span>
+              <span class="text-indigo-400 font-mono">Sec B | Grp 3</span>
+            </span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/50 flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="font-semibold text-white">Nishnat Kothari</span>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/50 flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="font-semibold text-white">Snehasish Samantaray</span>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/50 flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="font-semibold text-white">Virag Shah</span>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/50 flex items-center space-x-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="font-semibold text-white">Priti Jogani</span>
+              </div>
+              <div class="px-2.5 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/50 flex items-center space-x-2 sm:col-span-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                <span class="font-semibold text-white">Ashi Jain</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -163,7 +176,7 @@
             <div>
               <span class="text-xs uppercase tracking-wider font-semibold text-blue-400">Primary Bank Case</span>
               <h3 class="text-xl font-bold text-white">ICICI Bank Limited</h3>
-              <p class="text-xs text-slate-400">Peer Group: HDFC Bank, Axis Bank, Kotak Mahindra Bank</p>
+              <p class="text-xs text-slate-400">Peers: HDFC Bank, Axis Bank, Kotak Mahindra Bank</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-black text-lg">
               ICICI
@@ -172,7 +185,7 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-slate-800 text-center">
             <div>
               <span class="text-xs text-slate-400 block">Total Advances</span>
-              <span class="text-base font-bold text-white">₹13,29,682 Cr</span>
+              <span class="text-base font-bold text-white">₹13.30 Lakh Cr</span>
               <span class="text-xs text-emerald-400 font-medium">+15.8% YoY</span>
             </div>
             <div>
@@ -181,19 +194,23 @@
               <span class="text-xs text-slate-500">Peak: 8.84% (FY18)</span>
             </div>
             <div>
-              <span class="text-xs text-slate-400 block">PCR</span>
+              <span class="text-xs text-slate-400 block">PCR Buffer</span>
               <span class="text-base font-bold text-indigo-400">81.4%</span>
-              <span class="text-xs text-slate-500">High Buffer</span>
+              <span class="text-xs text-slate-500">High Cushion</span>
             </div>
             <div>
-              <span class="text-xs text-slate-400 block">CRAR (Tier 1)</span>
+              <span class="text-xs text-slate-400 block">CRAR Tier-1</span>
               <span class="text-base font-bold text-white">15.8%</span>
               <span class="text-xs text-emerald-400">CET1: 14.6%</span>
             </div>
           </div>
-          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-            <strong>Key Finding:</strong> Successful post-FY18 turnaround under 'Return on Assets' strategy. Aggressive de-risking of corporate book, wholesale write-offs, and pivot to secured retail have driven GNPA down by 688 bps from peak crisis levels.
-          </p>
+          <!-- Presentation Interpretation Line -->
+          <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+            <span class="font-bold text-indigo-400 block mb-0.5">💡 Presentation Takeaway (ICICI Turnaround):</span>
+            <p class="text-slate-300">
+              Aggressive post-FY18 balance-sheet de-risking: resolved stressed corporate exposures, elevated PCR to 81.4%, and pivoted advances toward secured retail mortgages (reducing GNPA by 688 bps from peak).
+            </p>
+          </div>
         </div>
 
         <!-- Bajaj Finance Card -->
@@ -202,7 +219,7 @@
             <div>
               <span class="text-xs uppercase tracking-wider font-semibold text-orange-400">Primary NBFC Case</span>
               <h3 class="text-xl font-bold text-white">Bajaj Finance Limited</h3>
-              <p class="text-xs text-slate-400">Peer Group: Shriram, Cholamandalam, Mahindra Finance</p>
+              <p class="text-xs text-slate-400">Peers: Shriram, Cholamandalam, Mahindra Finance</p>
             </div>
             <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 font-black text-lg">
               BAJAJ
@@ -211,7 +228,7 @@
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-slate-800 text-center">
             <div>
               <span class="text-xs text-slate-400 block">Total AUM</span>
-              <span class="text-base font-bold text-white">₹3,94,800 Cr</span>
+              <span class="text-base font-bold text-white">₹3.95 Lakh Cr</span>
               <span class="text-xs text-emerald-400 font-medium">10-Yr CAGR: 31.4%</span>
             </div>
             <div>
@@ -222,17 +239,21 @@
             <div>
               <span class="text-xs text-slate-400 block">PCR (Stage 3)</span>
               <span class="text-base font-bold text-indigo-400">62.8%</span>
-              <span class="text-xs text-slate-500">Ind AS Compliant</span>
+              <span class="text-xs text-slate-500">Ind AS Standard</span>
             </div>
             <div>
-              <span class="text-xs text-slate-400 block">CRAR (Tier 1)</span>
+              <span class="text-xs text-slate-400 block">CRAR Tier-1</span>
               <span class="text-base font-bold text-white">21.4%</span>
               <span class="text-xs text-emerald-400">Well above 15%</span>
             </div>
           </div>
-          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
-            <strong>Key Finding:</strong> Extraordinary customer franchise growth fueled by omnichannel cross-sell engine. However, recent regulatory hikes in unsecured risk weights (Nov 2023) and rising credit costs in B2C personal loans have compressed ROE and triggered market model beta shifts.
-          </p>
+          <!-- Presentation Interpretation Line -->
+          <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+            <span class="font-bold text-orange-400 block mb-0.5">💡 Presentation Takeaway (Bajaj Capital Moat):</span>
+            <p class="text-slate-300">
+              Maintains an exceptional Tier-1 capital ratio of 21.4% and an industry-leading Stage 3 GNPA of 0.86%. However, RBI's 25% risk weight hike on unsecured loans (Nov 2023) has compressed NIMs and elevated credit cost sensitivity.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -240,56 +261,47 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Asset Quality Trajectory Chart -->
         <div class="glass-card rounded-xl p-5">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-2">
             <h4 class="text-sm font-bold text-white flex items-center space-x-2">
               <i data-lucide="line-chart" class="w-4 h-4 text-brand-400"></i>
               <span>GNPA Ratio Trajectory: Banks vs NBFCs (FY15–FY25)</span>
             </h4>
-            <span class="text-xs text-slate-400">Source: RBI & Company Filings</span>
+            <span class="text-xs text-slate-400">11-Year Cycle</span>
           </div>
-          <div class="h-64">
+          <div class="h-60">
             <canvas id="chart-gnpa-comparison"></canvas>
+          </div>
+          <div class="callout-box p-2.5 rounded-r-lg mt-3 text-xs">
+            <strong class="text-slate-200">🔍 Key Interpretation:</strong>
+            <span class="text-slate-300">Banks absorbed the severe corporate NPA peak in FY18 (ICICI at 8.84%), while NBFCs remained insulated until pandemic lockdowns in FY21, post which both converged to historically low delinquencies.</span>
           </div>
         </div>
 
         <!-- Market Risk vs Capital Strength Scatter/Radar -->
         <div class="glass-card rounded-xl p-5">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-2">
             <h4 class="text-sm font-bold text-white flex items-center space-x-2">
               <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-400"></i>
               <span>Parametric 99% 1-Day VaR vs Capital Adequacy (CRAR)</span>
             </h4>
             <span class="text-xs text-slate-400">FY25 Data</span>
           </div>
-          <div class="h-64">
+          <div class="h-60">
             <canvas id="chart-var-capital"></canvas>
+          </div>
+          <div class="callout-box p-2.5 rounded-r-lg mt-3 text-xs">
+            <strong class="text-slate-200">🔍 Key Interpretation:</strong>
+            <span class="text-slate-300">NBFCs (Bajaj, Shriram, MMFS) display higher 1-day tail risk (VaR 3.2%–3.6%) compared to Banks (2.2%–2.8%), but compensate by maintaining significantly higher Tier-1 capital buffers (>18%).</span>
           </div>
         </div>
       </div>
 
-      <!-- Core Research Questions & Verdicts -->
-      <div class="glass-card rounded-xl p-6">
-        <h4 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
-          <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i>
-          <span>Academic Hypotheses Testing Summary</span>
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div class="p-4 rounded-lg bg-slate-900/80 border border-slate-800">
-            <span class="text-indigo-400 font-bold block mb-1">H1: Credit Cost Asymmetry</span>
-            <p class="text-slate-300 mb-2">NBFC credit costs exhibit significantly higher standard deviation (1.82%) than banks (0.87%) during economic downturns.</p>
-            <span class="inline-block px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Rejected H0 (p = 0.0042)</span>
-          </div>
-          <div class="p-4 rounded-lg bg-slate-900/80 border border-slate-800">
-            <span class="text-indigo-400 font-bold block mb-1">H2: Capital Buffer Defense</span>
-            <p class="text-slate-300 mb-2">Institutions maintaining Tier-1 capital > 15% experience 34% lower maximum drawdowns during crisis events.</p>
-            <span class="inline-block px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Rejected H0 (p = 0.0185)</span>
-          </div>
-          <div class="p-4 rounded-lg bg-slate-900/80 border border-slate-800">
-            <span class="text-indigo-400 font-bold block mb-1">H3: Systematic vs Idiosyncratic</span>
-            <p class="text-slate-300 mb-2">Systematic risk variance contribution increases from 38.2% in calm regimes to 68.4% during systemic shock regimes.</p>
-            <span class="inline-block px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Rejected H0 (p < 0.001)</span>
-          </div>
-        </div>
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-end pt-4 border-t border-slate-800">
+        <button onclick="switchTab('institution')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
+          <span>Next: Institutional Benchmarks</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
     </section>
 
@@ -300,10 +312,10 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 class="text-2xl font-bold text-white">Peer Group Benchmarking & Historical Financials</h2>
-          <p class="text-slate-400 text-xs sm:text-sm">Detailed 11-Year FY15–FY25 balance sheet, asset quality, and capital adequacy metrics.</p>
+          <p class="text-slate-400 text-xs sm:text-sm">Comprehensive FY15–FY25 balance sheet, asset quality, and capital adequacy time-series for all 8 institutions.</p>
         </div>
-        <!-- Selector -->
-        <div class="flex items-center space-x-3">
+        <!-- Selector with Reset Button -->
+        <div class="flex items-center space-x-2.5">
           <label class="text-xs text-slate-300 font-semibold">Select Entity:</label>
           <select id="company-select" onchange="renderCompanyDetails()" class="bg-slate-900 border border-slate-700 text-white rounded-lg px-3 py-1.5 text-xs focus:ring-2 focus:ring-brand-500 outline-none">
             <optgroup label="Banks">
@@ -319,6 +331,10 @@
               <option value="MMFS">Mahindra Finance</option>
             </optgroup>
           </select>
+          <button onclick="resetCompanySelector()" title="Reset to ICICI Bank" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs flex items-center space-x-1 border border-slate-700">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset</span>
+          </button>
         </div>
       </div>
 
@@ -329,19 +345,22 @@
 
       <!-- Historical Financials Table -->
       <div class="glass-card rounded-xl p-5 overflow-hidden">
-        <h4 class="text-sm font-bold text-white mb-3 flex items-center space-x-2">
-          <i data-lucide="table" class="w-4 h-4 text-brand-400"></i>
-          <span>11-Year Financial & Credit Risk Time Series (FY15 – FY25)</span>
-        </h4>
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="text-sm font-bold text-white flex items-center space-x-2">
+            <i data-lucide="table" class="w-4 h-4 text-brand-400"></i>
+            <span>11-Year Financial & Credit Risk Time Series (FY15 – FY25)</span>
+          </h4>
+          <span class="text-xs text-slate-400">Values in ₹ Crore</span>
+        </div>
         <div class="overflow-x-auto">
           <table class="w-full text-xs text-left text-slate-300" id="historical-financials-table">
             <thead class="text-xs uppercase bg-slate-900/90 text-slate-400 border-b border-slate-800">
               <tr>
                 <th class="px-3 py-2.5">FY</th>
-                <th class="px-3 py-2.5">Total Assets (₹ Cr)</th>
-                <th class="px-3 py-2.5">Advances / AUM (₹ Cr)</th>
-                <th class="px-3 py-2.5">Net Profit (₹ Cr)</th>
-                <th class="px-3 py-2.5">GNPA (₹ Cr)</th>
+                <th class="px-3 py-2.5">Total Assets</th>
+                <th class="px-3 py-2.5">Advances / AUM</th>
+                <th class="px-3 py-2.5">PAT</th>
+                <th class="px-3 py-2.5">GNPA Amount</th>
                 <th class="px-3 py-2.5">GNPA %</th>
                 <th class="px-3 py-2.5">NNPA %</th>
                 <th class="px-3 py-2.5">PCR %</th>
@@ -353,6 +372,11 @@
               <!-- Rendered by JS -->
             </tbody>
           </table>
+        </div>
+        <!-- Presentation Interpretation Line -->
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point:</strong>
+          <span class="text-slate-300">Observe the structural divergence in credit metrics: ICICI's PCR escalated from 58.6% (FY15) to 81.4% (FY25), insulating net NPAs below 0.5%, while Bajaj Finance scaled AUM 12x with Stage-3 assets consistently contained below 1.8%.</span>
         </div>
       </div>
 
@@ -367,9 +391,9 @@
             <thead class="text-xs uppercase bg-slate-900/90 text-slate-400 border-b border-slate-800">
               <tr>
                 <th class="px-3 py-2.5">Institution</th>
-                <th class="px-3 py-2.5">Type</th>
+                <th class="px-3 py-2.5">Group</th>
                 <th class="px-3 py-2.5">Advances / AUM</th>
-                <th class="px-3 py-2.5">Net Profit</th>
+                <th class="px-3 py-2.5">PAT (₹ Cr)</th>
                 <th class="px-3 py-2.5">GNPA %</th>
                 <th class="px-3 py-2.5">NNPA %</th>
                 <th class="px-3 py-2.5">PCR %</th>
@@ -383,6 +407,22 @@
             </tbody>
           </table>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Key Comparative Insight:</strong>
+          <span class="text-slate-300">HDFC Bank and Kotak Mahindra Bank lead bank solvency with Tier-1 > 16.5%, whereas Bajaj Finance leads the entire non-bank peer group with the lowest Stage 3 ratio (0.86%) and highest CRAR (21.4%).</span>
+        </div>
+      </div>
+
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <button onclick="switchTab('overview')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center space-x-1.5 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Previous: Overview</span>
+        </button>
+        <button onclick="switchTab('creditlab')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
+          <span>Next: Credit Risk Lab</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
     </section>
 
@@ -392,7 +432,7 @@
     <section id="view-creditlab" class="tab-view hidden space-y-6">
       <div>
         <h2 class="text-2xl font-bold text-white">Credit Risk Analytics Laboratory</h2>
-        <p class="text-slate-400 text-xs sm:text-sm">Classroom methodology implementations: DPD Delinquency, Logistic Regression PD, 36-Month LGD Vintage Curve, and ECL Staging.</p>
+        <p class="text-slate-400 text-xs sm:text-sm">Classroom econometric risk implementations: DPD Delinquency buckets, Logistic Regression PD model, 36-Month LGD Vintage Curve, and ECL staging.</p>
       </div>
 
       <!-- DPD Delinquency Roll Rates -->
@@ -401,7 +441,6 @@
           <i data-lucide="clock" class="w-4 h-4 text-brand-400"></i>
           <span>Delinquency Roll Rates (Days Past Due - DPD Analysis)</span>
         </h4>
-        <p class="text-xs text-slate-400 mb-4">Account-based and balance-based distribution across delinquency buckets from classroom exercise dataset.</p>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="overflow-x-auto">
             <table class="w-full text-xs text-left text-slate-300">
@@ -410,9 +449,9 @@
                   <th class="px-3 py-2">Bucket</th>
                   <th class="px-3 py-2">Accounts</th>
                   <th class="px-3 py-2">Acc %</th>
-                  <th class="px-3 py-2">Balance (₹ Cr)</th>
+                  <th class="px-3 py-2">Balance</th>
                   <th class="px-3 py-2">Bal %</th>
-                  <th class="px-3 py-2">Default Status</th>
+                  <th class="px-3 py-2">Classification</th>
                 </tr>
               </thead>
               <tbody id="dpd-table-body" class="divide-y divide-slate-800/60">
@@ -424,11 +463,15 @@
             <canvas id="chart-dpd-distribution"></canvas>
           </div>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point (Delinquency Migration):</strong>
+          <span class="text-slate-300">85.4% of retail borrowers remain in current status (0 DPD). However, once delinquency reaches 60+ DPD, the roll-rate probability to 90+ default accelerates to > 68%, indicating the critical need for early 30-day intervention.</span>
+        </div>
       </div>
 
-      <!-- Interactive Logistic PD Scorer -->
+      <!-- Interactive Logistic PD Scorer with Reset Button -->
       <div class="glass-card rounded-xl p-6 border-t-4 border-indigo-500">
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
           <div>
             <h4 class="text-base font-bold text-white flex items-center space-x-2">
               <i data-lucide="calculator" class="w-5 h-5 text-indigo-400"></i>
@@ -436,7 +479,13 @@
             </h4>
             <p class="text-xs text-slate-400">Classroom econometric model: ROC-AUC = 0.8597, Gini = 71.95%, KS = 56.40%</p>
           </div>
-          <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold">Trained on 10,000 Retail Loans</span>
+          <div class="flex items-center space-x-2">
+            <button onclick="resetPDSimulator()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center space-x-1.5 border border-slate-700 transition">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>Reset Defaults</span>
+            </button>
+            <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-semibold">Trained on 10,000 Retail Loans</span>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -486,7 +535,7 @@
           <!-- PD Result Card -->
           <div class="bg-slate-900/90 rounded-xl p-5 border border-slate-800 flex flex-col justify-between text-center">
             <div>
-              <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Estimated Default Probability</span>
+              <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Estimated Probability of Default</span>
               <div id="pd-output-val" class="text-4xl font-extrabold text-emerald-400 my-2">2.41%</div>
               <span id="pd-risk-badge" class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-xs">Prime (Low Risk)</span>
             </div>
@@ -506,10 +555,14 @@
               </div>
             </div>
 
-            <p class="text-[10px] text-slate-500 mt-3">
-              Logistic Formula: P(Default) = 1 / (1 + e<sup>-z</sup>) where z = β<sub>0</sub> + Σ β<sub>i</sub> X<sub>i</sub>
+            <p class="text-[10px] text-slate-500 mt-3 font-mono">
+              P(Default) = 1 / (1 + e<sup>-z</sup>)
             </p>
           </div>
+        </div>
+        <div class="callout-box p-3 rounded-r-lg mt-4 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point (Odds Ratio):</strong>
+          <span class="text-slate-300">In this logistic regression, every prior delinquency within 6 months multiplies the odds of default by 1.92x (p < 0.001), while every 50-point increase in CIBIL score lowers default odds by 34%.</span>
         </div>
       </div>
 
@@ -517,24 +570,28 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- LGD Curve -->
         <div class="glass-card rounded-xl p-5">
-          <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center justify-between mb-2">
             <h4 class="text-sm font-bold text-white flex items-center space-x-2">
               <i data-lucide="trending-down" class="w-4 h-4 text-orange-400"></i>
               <span>36-Month Cumulative LGD Recovery Curve</span>
             </h4>
-            <span class="text-xs text-slate-400">Default Cohort Analysis</span>
+            <span class="text-xs text-slate-400">Default Cohort</span>
           </div>
           <p class="text-xs text-slate-400 mb-2">
-            Terminal Recovery: <b class="text-emerald-400">32.82%</b> | Nominal LGD: <b class="text-orange-400">67.18%</b> | Economic LGD (12% hurdle): <b class="text-rose-400">73.65%</b>
+            Terminal Recovery: <b class="text-emerald-400">32.82%</b> | Nominal LGD: <b class="text-orange-400">67.18%</b> | Discounted LGD (12%): <b class="text-rose-400">73.65%</b>
           </p>
-          <div class="h-64">
+          <div class="h-56">
             <canvas id="chart-lgd-curve"></canvas>
+          </div>
+          <div class="callout-box p-2.5 rounded-r-lg mt-3 text-xs">
+            <strong class="text-slate-200">🔍 Key Interpretation:</strong>
+            <span class="text-slate-300">75% of total recoveries happen within the first 12 months. Beyond Month 24, recovery rate flattens below 0.2%/month, demonstrating the time value erosion in economic LGD.</span>
           </div>
         </div>
 
         <!-- ECL Staging Table -->
         <div class="glass-card rounded-xl p-5">
-          <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center justify-between mb-2">
             <h4 class="text-sm font-bold text-white flex items-center space-x-2">
               <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-400"></i>
               <span>Expected Credit Loss (ECL = PD × LGD × EAD)</span>
@@ -546,11 +603,11 @@
               <thead class="bg-slate-900 text-slate-400 border-b border-slate-800">
                 <tr>
                   <th class="px-3 py-2">Stage</th>
-                  <th class="px-3 py-2">EAD (₹ Cr)</th>
+                  <th class="px-3 py-2">EAD</th>
                   <th class="px-3 py-2">Horizon</th>
-                  <th class="px-3 py-2">Avg PD</th>
-                  <th class="px-3 py-2">LGD</th>
-                  <th class="px-3 py-2">ECL (₹ Cr)</th>
+                  <th class="px-3 py-2">PD %</th>
+                  <th class="px-3 py-2">LGD %</th>
+                  <th class="px-3 py-2">ECL Amount</th>
                 </tr>
               </thead>
               <tbody id="ecl-table-body" class="divide-y divide-slate-800/60">
@@ -558,14 +615,23 @@
               </tbody>
             </table>
           </div>
-          <div class="mt-4 p-3 bg-slate-900/80 rounded-lg text-xs text-slate-400">
-            <div class="flex justify-between font-bold text-slate-200">
-              <span>Total Provision Required:</span>
-              <span class="text-emerald-400">₹6.58 Cr (Coverage: 6.58% on ₹100 Cr Cohort)</span>
-            </div>
-            <span class="text-[11px] text-slate-500 block mt-1">Stress scenario (+30% PD, +15% LGD) raises total ECL to ₹9.84 Cr (+49.5%).</span>
+          <div class="callout-box p-2.5 rounded-r-lg mt-3 text-xs">
+            <strong class="text-slate-200">🔍 Key Interpretation:</strong>
+            <span class="text-slate-300">Moving from 12-Month ECL (Stage 1) to Lifetime ECL (Stage 2/3) causes provisioning to spike by 6.5x, reflecting the full unexpired maturity risk under Ind AS 109.</span>
           </div>
         </div>
+      </div>
+
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <button onclick="switchTab('institution')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center space-x-1.5 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Previous: Institutional</span>
+        </button>
+        <button onclick="switchTab('capital')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
+          <span>Next: Vasicek IRB Capital</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
     </section>
 
@@ -575,17 +641,24 @@
     <section id="view-capital" class="tab-view hidden space-y-6">
       <div>
         <h2 class="text-2xl font-bold text-white">Unexpected Loss & Regulatory Capital Modeling</h2>
-        <p class="text-slate-400 text-xs sm:text-sm">Basel II/III Internal Ratings-Based (IRB) Asymptotic Single Risk Factor (ASRF) Vasicek model vs Standardized Approach.</p>
+        <p class="text-slate-400 text-xs sm:text-sm">Basel II/III Internal Ratings-Based (IRB) Asymptotic Single Risk Factor (ASRF) Vasicek formula vs Standardized Approach.</p>
       </div>
 
-      <!-- Vasicek Formula Explanation & Live Sim -->
+      <!-- Vasicek Formula Explanation & Live Sim with Reset -->
       <div class="glass-card rounded-xl p-6 border-t-4 border-indigo-500">
-        <h3 class="text-base font-bold text-white mb-2 flex items-center space-x-2">
-          <i data-lucide="binary" class="w-5 h-5 text-indigo-400"></i>
-          <span>Vasicek IRB Capital Formula Engine</span>
-        </h3>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+          <h3 class="text-base font-bold text-white flex items-center space-x-2">
+            <i data-lucide="binary" class="w-5 h-5 text-indigo-400"></i>
+            <span>Vasicek IRB Capital Formula Engine</span>
+          </h3>
+          <button onclick="resetVasicekSim()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center space-x-1.5 border border-slate-700 transition">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset Correlation (ρ = 0.10)</span>
+          </button>
+        </div>
+
         <p class="text-xs text-slate-300 mb-4 leading-relaxed font-mono bg-slate-900 p-3 rounded-lg border border-slate-800">
-          K = LGD × [ N( (N⁻¹(PD) + √ρ · N⁻¹(0.999)) / √(1 - ρ) ) - PD ] × (1 + (M - 2.5)·b) / (1 - 1.5·b)
+          K = LGD × [ N( (N⁻¹(PD) + √ρ · N⁻¹(0.999)) / √(1 - ρ) ) - PD ]
         </p>
 
         <!-- Live Correlation Slider -->
@@ -596,18 +669,18 @@
             </label>
             <input type="range" id="input-rho" min="0.04" max="0.24" step="0.01" value="0.10" oninput="updateVasicekSim()" class="w-full accent-indigo-500">
             <div class="flex justify-between text-[11px] text-slate-500">
-              <span>0.04 (Retail QRRE/Cards)</span>
-              <span>0.10 (Standard Classroom)</span>
-              <span>0.15 (Residential Mortgages)</span>
+              <span>0.04 (Retail / Cards)</span>
+              <span>0.10 (Classroom Benchmark)</span>
+              <span>0.15 (Mortgages)</span>
               <span>0.24 (Large Corporates)</span>
             </div>
             <p class="text-[11px] text-slate-400">
-              Higher asset correlation ρ signifies greater sensitivity to macro-systemic shocks, dramatically driving up required tail capital at the 99.9% confidence interval.
+              Higher asset correlation ρ signifies greater systemic sensitivity, driving up required tail capital at the 99.9% confidence interval.
             </p>
           </div>
 
           <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center flex flex-col justify-center">
-            <span class="text-xs text-slate-400 font-bold uppercase">Total IRB Capital (₹1,000 Cr Portfolio)</span>
+            <span class="text-xs text-slate-400 font-bold uppercase">Simulated Portfolio Capital</span>
             <span id="vasicek-sim-capital" class="text-3xl font-extrabold text-indigo-400 my-1">₹133.86 Cr</span>
             <span id="vasicek-sim-delta" class="text-xs text-emerald-400 font-medium">+43.4% above Standardized</span>
           </div>
@@ -619,13 +692,13 @@
             <thead class="bg-slate-900 text-slate-400 border-b border-slate-800">
               <tr>
                 <th class="px-3 py-2.5">Asset Class</th>
-                <th class="px-3 py-2.5">EAD (₹ Cr)</th>
+                <th class="px-3 py-2.5">EAD</th>
                 <th class="px-3 py-2.5">PD %</th>
                 <th class="px-3 py-2.5">LGD %</th>
                 <th class="px-3 py-2.5">Correlation ρ</th>
-                <th class="px-3 py-2.5">IRB K (%)</th>
-                <th class="px-3 py-2.5">IRB Capital (₹ Cr)</th>
-                <th class="px-3 py-2.5">Standardized (₹ Cr)</th>
+                <th class="px-3 py-2.5">IRB Capital Ratio %</th>
+                <th class="px-3 py-2.5">IRB Capital</th>
+                <th class="px-3 py-2.5">Standardized Capital</th>
                 <th class="px-3 py-2.5">Capital Wedge</th>
               </tr>
             </thead>
@@ -634,17 +707,37 @@
             </tbody>
           </table>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-4 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point (Capital Wedge):</strong>
+          <span class="text-slate-300">The Standardized Approach prescribes flat risk weights (e.g. 125% for unsecured retail), whereas the Vasicek IRB model scales dynamically with correlation. For high-PD unsecured personal loans, IRB requires +43% higher capital, exposing the tail-risk undercapitalization under standardized rules.</span>
+        </div>
       </div>
 
       <!-- CRAR Capital Adequacy Across All 8 Entities -->
       <div class="glass-card rounded-xl p-5">
         <h4 class="text-sm font-bold text-white mb-3 flex items-center space-x-2">
           <i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i>
-          <span>Regulatory Capital Adequacy (CRAR & Tier-1) Distribution</span>
+          <span>Regulatory Capital Adequacy (Tier 1 + Tier 2 Breakdown across Peers)</span>
         </h4>
-        <div class="h-64">
+        <div class="h-60">
           <canvas id="chart-capital-adequacy"></canvas>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Key Interpretation:</strong>
+          <span class="text-slate-300">All 8 institutions comfortably exceed the RBI regulatory floor of 11.5% CRAR (and 15% for upper-layer NBFCs), providing deep loss-absorption capacity against credit-shock scenarios.</span>
+        </div>
+      </div>
+
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <button onclick="switchTab('creditlab')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center space-x-1.5 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Previous: Credit Risk Lab</span>
+        </button>
+        <button onclick="switchTab('marketrisk')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
+          <span>Next: Market Risk & VaR</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
     </section>
 
@@ -684,17 +777,21 @@
             </tbody>
           </table>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point (Tail Risk Comparison):</strong>
+          <span class="text-slate-300">Across all 3 methodologies, Historical VaR exceeds Parametric VaR due to fat-tail kurtosis (leptokurtic returns). Expected Shortfall at 99% reaches 7.02% for ICICI and 6.94% for Bajaj, demonstrating that tail losses beyond VaR are severe.</span>
+        </div>
       </div>
 
       <!-- Kupiec POF Backtesting Dashboard -->
       <div class="glass-card rounded-xl p-5 border-l-4 border-emerald-500">
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-3">
           <div>
             <h4 class="text-base font-bold text-white flex items-center space-x-2">
               <i data-lucide="check-check" class="w-5 h-5 text-emerald-400"></i>
               <span>Basel Committee Kupiec Proportion of Failures (POF) Backtesting</span>
             </h4>
-            <p class="text-xs text-slate-400">Testing 1-day 99% VaR over most recent 250 trading days (Expected Exceptions = 2.5)</p>
+            <p class="text-xs text-slate-400">Testing 1-day 99% VaR over 1,237 trading days (Expected Exceptions = 12.4)</p>
           </div>
           <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase">All 8 Institutions in Green Zone</span>
         </div>
@@ -707,7 +804,7 @@
                 <th class="px-3 py-2.5">Exceptions (N)</th>
                 <th class="px-3 py-2.5">Expected</th>
                 <th class="px-3 py-2.5">Failure Rate %</th>
-                <th class="px-3 py-2.5">LR_POF Statistic</th>
+                <th class="px-3 py-2.5">LR_POF Stat</th>
                 <th class="px-3 py-2.5">p-value</th>
                 <th class="px-3 py-2.5">Basel Traffic Light</th>
               </tr>
@@ -717,14 +814,30 @@
             </tbody>
           </table>
         </div>
+        <div class="callout-box p-3 rounded-r-lg mt-3 text-xs">
+          <strong class="text-slate-200">🔍 Key Regulatory Finding:</strong>
+          <span class="text-slate-300">Under the Basel Committee traffic light system, all 8 institutions have Kupiec p-values > 0.05 (fail to reject H0). Models are statistically accurate and accepted in the Basel Green Zone without supervisory penalty multipliers.</span>
+        </div>
       </div>
 
       <!-- VaR Visual Comparison Chart -->
       <div class="glass-card rounded-xl p-5">
         <h4 class="text-sm font-bold text-white mb-3">Historical 99% 1-Day VaR vs Expected Shortfall</h4>
-        <div class="h-64">
+        <div class="h-60">
           <canvas id="chart-var-es"></canvas>
         </div>
+      </div>
+
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <button onclick="switchTab('capital')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center space-x-1.5 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Previous: Vasicek Capital</span>
+        </button>
+        <button onclick="switchTab('eventstudy')" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
+          <span>Next: Event Study Shocks</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
       </div>
     </section>
 
@@ -737,12 +850,16 @@
           <h2 class="text-2xl font-bold text-white">Event Study & Financial Shocks (15 Major Events)</h2>
           <p class="text-slate-400 text-xs sm:text-sm">Abnormal and Cumulative Abnormal Returns (CAR) computed via OLS Market Model over 250-day pre-event estimation windows.</p>
         </div>
-        <!-- Event Dropdown -->
-        <div class="flex items-center space-x-2">
+        <!-- Event Dropdown with Reset -->
+        <div class="flex items-center space-x-2.5">
           <label class="text-xs text-slate-300 font-semibold">Select Event:</label>
           <select id="event-select" onchange="renderEventDetail()" class="bg-slate-900 border border-slate-700 text-white rounded-lg px-3 py-1.5 text-xs focus:ring-2 focus:ring-brand-500 outline-none max-w-xs">
             <!-- Populated by JS -->
           </select>
+          <button onclick="resetEventSelector()" title="Reset to First Event" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs flex items-center space-x-1 border border-slate-700">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset</span>
+          </button>
         </div>
       </div>
 
@@ -758,16 +875,20 @@
             <i data-lucide="bar-chart" class="w-4 h-4 text-rose-400"></i>
             <span id="event-chart-title">Cumulative Abnormal Returns across Institutions</span>
           </h4>
-          <span class="text-xs text-slate-400">Windows: [-1,+1], [-5,+5], [-5,+10]</span>
+          <span class="text-xs text-slate-400">Windows: [-1,+1] and [-5,+5]</span>
         </div>
-        <div class="h-72">
+        <div class="h-64">
           <canvas id="chart-event-car"></canvas>
+        </div>
+        <div class="callout-box p-3 rounded-r-lg mt-4 text-xs">
+          <strong class="text-slate-200">🔍 Presentation Talking Point (Transmission Channels):</strong>
+          <span class="text-slate-300">Macro shocks (COVID crash, IL&FS default) created sharp negative CARs with asymmetric impact: NBFCs suffered harsher drawdowns during wholesale liquidity freezes, whereas banks experienced prolonged negative CARs following regulatory asset quality reviews (AQR).</span>
         </div>
       </div>
 
       <!-- Complete Event Database Table -->
       <div class="glass-card rounded-xl p-5">
-        <h4 class="text-sm font-bold text-white mb-3">Historical Event Database & Timeline (2016–2024)</h4>
+        <h4 class="text-sm font-bold text-white mb-3">Historical Event Database Timeline (2015–2024)</h4>
         <div class="overflow-x-auto">
           <table class="w-full text-xs text-left text-slate-300">
             <thead class="bg-slate-900 text-slate-400 border-b border-slate-800">
@@ -778,7 +899,7 @@
                 <th class="px-3 py-2">Category</th>
                 <th class="px-3 py-2">ICICI CAR[-1,+1]</th>
                 <th class="px-3 py-2">Bajaj CAR[-1,+1]</th>
-                <th class="px-3 py-2">Market Impact</th>
+                <th class="px-3 py-2">Risk Scope</th>
               </tr>
             </thead>
             <tbody id="event-table-body" class="divide-y divide-slate-800/60">
@@ -787,95 +908,17 @@
           </table>
         </div>
       </div>
-    </section>
 
-    <!-- ========================================== -->
-    <!-- TAB 7: HYPOTHESIS TESTING -->
-    <!-- ========================================== -->
-    <section id="view-hypotheses" class="tab-view hidden space-y-6">
-      <div>
-        <h2 class="text-2xl font-bold text-white">Empirical Academic Hypothesis Testing</h2>
-        <p class="text-slate-400 text-xs sm:text-sm">Rigorous econometric validation of 5 core risk management hypotheses formulated for this capstone.</p>
-      </div>
-
-      <div class="space-y-4" id="hypotheses-cards-container">
-        <!-- Rendered by JS -->
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- TAB 8: PRESENTATION MODE -->
-    <!-- ========================================== -->
-    <section id="view-presentation" class="tab-view hidden space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-2xl font-bold text-white">Oral Defense Presentation Deck</h2>
-          <p class="text-slate-400 text-xs sm:text-sm">Slide-by-slide executive briefing for presentation before Prof. Priyadarshi Dutta.</p>
-        </div>
-        <div class="flex items-center space-x-2">
-          <button onclick="prevSlide()" class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300 hover:text-white text-xs flex items-center space-x-1">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            <span>Prev</span>
-          </button>
-          <span id="slide-indicator" class="text-xs text-indigo-400 font-bold px-2">Slide 1 of 8</span>
-          <button onclick="nextSlide()" class="px-3 py-1.5 rounded-lg bg-indigo-600 border border-indigo-500 text-white hover:bg-indigo-500 text-xs flex items-center space-x-1">
-            <span>Next</span>
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Slide Container -->
-      <div id="slide-content-box" class="glass-card rounded-2xl p-8 min-h-[480px] flex flex-col justify-between border-t-4 border-indigo-500 relative">
-        <!-- Rendered by JS -->
-      </div>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- TAB 9: DOWNLOAD HUB & DOCUMENTATION -->
-    <!-- ========================================== -->
-    <section id="view-downloads" class="tab-view hidden space-y-6">
-      <div>
-        <h2 class="text-2xl font-bold text-white">Data Repository & Deliverables Hub</h2>
-        <p class="text-slate-400 text-xs sm:text-sm">Download Master Excel Model, all 28 publication CSV datasets, and the 75-page Comprehensive Research Report.</p>
-      </div>
-
-      <!-- Top Primary Downloads -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="glass-card rounded-xl p-6 border-l-4 border-emerald-500 flex items-center justify-between">
-          <div>
-            <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Primary Master File</span>
-            <h3 class="text-lg font-bold text-white">FRA Master Analytics Workbook</h3>
-            <p class="text-xs text-slate-400 mt-1">26 comprehensive worksheets, live financial models, formatted tables, and audit logs.</p>
-          </div>
-          <a href="assets/FRA_Master_Analytics_Workbook.xlsx" download class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-emerald-500/20 transition">
-            <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-            <span>Download .xlsx</span>
-          </a>
-        </div>
-
-        <div class="glass-card rounded-xl p-6 border-l-4 border-indigo-500 flex items-center justify-between">
-          <div>
-            <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider">Academic Report</span>
-            <h3 class="text-lg font-bold text-white">Comprehensive Research Report</h3>
-            <p class="text-xs text-slate-400 mt-1">75+ pages equivalent: executive summary, institutional analysis, methodology, and policy recommendations.</p>
-          </div>
-          <a href="assets/FRA_Comprehensive_Research_Report.md" download class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-indigo-500/20 transition">
-            <i data-lucide="file-text" class="w-4 h-4"></i>
-            <span>Download .md</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- CSVs Grid -->
-      <div class="glass-card rounded-xl p-6">
-        <h4 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
-          <i data-lucide="database" class="w-5 h-5 text-indigo-400"></i>
-          <span>28 Machine-Readable Website CSV Datasets</span>
-        </h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 text-xs" id="csv-download-list">
-          <!-- Rendered by JS -->
-        </div>
+      <!-- Section Navigation Footer -->
+      <div class="flex justify-between items-center pt-4 border-t border-slate-800">
+        <button onclick="switchTab('marketrisk')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center space-x-1.5 transition">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Previous: Market Risk</span>
+        </button>
+        <button onclick="switchTab('overview')" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg shadow-emerald-500/20 transition">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>Back to Executive Summary (Start)</span>
+        </button>
       </div>
     </section>
 
@@ -891,61 +934,18 @@
       <div>
         <span>Course Instructor: <strong>Prof. Priyadarshi Dutta</strong></span>
       </div>
-      <div id="footer-team-info">
-        <span id="footer-group-text">Section B | Group 3 (Nishnat Kothari, Snehasish Samantaray, Virag Shah, Priti Jogani, Ashi Jain)</span>
+      <div>
+        <span class="text-slate-300 font-semibold">Section B • Group 3</span> (Nishnat, Snehasish, Virag, Priti, Ashi)
       </div>
     </div>
   </footer>
 
-  <!-- MODAL: EDIT TEAM DETAILS -->
-  <div id="team-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-      <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-        <h3 class="text-base font-bold text-white flex items-center space-x-2">
-          <i data-lucide="users" class="w-5 h-5 text-indigo-400"></i>
-          <span>Group & Student Profile</span>
-        </h3>
-        <button onclick="closeTeamModal()" class="text-slate-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div class="space-y-4 text-xs">
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-slate-300 font-semibold mb-1">Section</label>
-            <input type="text" id="modal-sec" value="B" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white outline-none focus:border-brand-500">
-          </div>
-          <div>
-            <label class="block text-slate-300 font-semibold mb-1">Group Number</label>
-            <input type="text" id="modal-grp" value="3" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white outline-none focus:border-brand-500">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-slate-300 font-semibold mb-1">Team Members & Roll Numbers</label>
-          <p class="text-[11px] text-slate-500 mb-2">Group 3 Student Roster (Add Roll Numbers if needed):</p>
-          <textarea id="modal-members" rows="6" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono text-xs outline-none focus:border-brand-500">Nishnat Kothari
-Snehasish Samantaray
-Virag Shah
-Priti Jogani
-Ashi Jain</textarea>
-        </div>
-      </div>
-
-      <div class="flex justify-end space-x-3 mt-6 border-t border-slate-800 pt-3">
-        <button onclick="closeTeamModal()" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs">Close</button>
-        <button onclick="saveTeamInfo()" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs">Save & Update</button>
-      </div>
-    </div>
-  </div>
-
   <!-- APPLICATION LOGIC -->
   <script>
-    // 1. Data Reference
+    // 1. Master Data Reference
     const DATA = window.FRA_DATA || {};
 
-    // 2. Tab Navigation
+    // 2. Navigation Function
     function switchTab(tabId) {
       document.querySelectorAll('.tab-view').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
@@ -959,51 +959,43 @@ Ashi Jain</textarea>
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 3. Team Info LocalStorage Management
-    function loadTeamInfo() {
-      const saved = localStorage.getItem('fra_team_info');
-      let team = {
-        section: "B",
-        group: "3",
-        members: "Nishnat Kothari\nSnehasish Samantaray\nVirag Shah\nPriti Jogani\nAshi Jain"
-      };
-      if (saved) {
-        try { team = JSON.parse(saved); } catch(e) {}
+    // 3. Reset Functions for Interactive Components
+    function resetCompanySelector() {
+      const sel = document.getElementById('company-select');
+      if (sel) {
+        sel.value = 'ICICIBANK';
+        renderCompanyDetails();
       }
-
-      document.getElementById('disp-sec-grp').innerText = `Section ${team.section} | Group ${team.group}`;
-      document.getElementById('footer-group-text').innerText = `Section ${team.section} | Group ${team.group} (${team.members.replace(/\n/g, ', ')})`;
-      document.getElementById('modal-sec').value = team.section;
-      document.getElementById('modal-grp').value = team.group;
-      document.getElementById('modal-members').value = team.members;
-
-      const memberLines = team.members.split('\n').filter(l => l.trim().length > 0);
-      document.getElementById('disp-members-count').innerText = `${memberLines.length} Members`;
     }
 
-    function openTeamModal() {
-      document.getElementById('team-modal').classList.remove('hidden');
+    function resetPDSimulator() {
+      document.getElementById('input-bureau').value = 720;
+      document.getElementById('input-delinq').value = 0;
+      document.getElementById('input-dti').value = 35;
+      document.getElementById('input-util').value = 40;
+      document.getElementById('input-ltv').value = 75;
+      calculatePD();
     }
 
-    function closeTeamModal() {
-      document.getElementById('team-modal').classList.add('hidden');
+    function resetVasicekSim() {
+      const slider = document.getElementById('input-rho');
+      if (slider) {
+        slider.value = 0.10;
+        updateVasicekSim();
+      }
     }
 
-    function saveTeamInfo() {
-      const team = {
-        section: document.getElementById('modal-sec').value.trim() || 'A',
-        group: document.getElementById('modal-grp').value.trim() || '1',
-        members: document.getElementById('modal-members').value.trim()
-      };
-      localStorage.setItem('fra_team_info', JSON.stringify(team));
-      loadTeamInfo();
-      closeTeamModal();
+    function resetEventSelector() {
+      const sel = document.getElementById('event-select');
+      if (sel && sel.options.length > 0) {
+        sel.selectedIndex = 0;
+        renderEventDetail();
+      }
     }
 
-    // 4. Initial Renderers
+    // 4. Initial Bootstrap
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      loadTeamInfo();
       renderOverviewCharts();
       renderCompanyDetails();
       renderPeerMatrix();
@@ -1014,9 +1006,6 @@ Ashi Jain</textarea>
       renderVaR();
       renderBacktesting();
       renderEvents();
-      renderHypotheses();
-      renderSlide(0);
-      renderDownloads();
     });
 
     // Overview Charts
@@ -1114,7 +1103,6 @@ Ashi Jain</textarea>
       const history = (DATA.historical_financials || []).filter(r => r.company_id === cid);
       const master = (DATA.company_master || []).find(r => r.company_id === cid) || {};
 
-      // Profile banner — use actual CSV column names: category, nse_symbol, bse_code, regulatory_regime
       const isBank = master.category === 'Bank';
       const banner = document.getElementById('company-profile-banner');
       banner.innerHTML = `
@@ -1126,7 +1114,7 @@ Ashi Jain</textarea>
             </div>
             <h3 class="text-2xl font-bold text-white mt-1">${master.company_name}</h3>
             <p class="text-xs text-slate-400 mt-0.5">HQ: ${master.headquarters} | Regulator: ${master.regulatory_regime}</p>
-            <p class="text-xs text-slate-500 mt-1">${master.description || ''}</p>
+            <p class="text-xs text-slate-400 mt-1 max-w-2xl">${master.description || ''}</p>
           </div>
           <div class="flex items-center space-x-3 text-right">
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
@@ -1134,14 +1122,13 @@ Ashi Jain</textarea>
               <span class="text-sm font-bold text-emerald-400">${master.accounting_standard}</span>
             </div>
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
-              <span class="text-[10px] text-slate-400 block uppercase">Role in Study</span>
+              <span class="text-[10px] text-slate-400 block uppercase">Study Role</span>
               <span class="text-sm font-bold text-indigo-400">${master.role_in_study}</span>
             </div>
           </div>
         </div>
       `;
 
-      // Financials table — actual columns: advances, aum, pat, gnpa_amount, gnpa_pct, nnpa_pct, pcr_pct, crar_pct, tier1_pct
       const tbody = document.getElementById('company-financials-body');
       tbody.innerHTML = '';
       history.forEach(r => {
@@ -1164,7 +1151,7 @@ Ashi Jain</textarea>
       });
     }
 
-    // Peer Matrix (FY25) — actual column: pat (not net_profit), tier1_pct (not tier_1_pct)
+    // Peer Matrix (FY25)
     function renderPeerMatrix() {
       const peers = (DATA.peer_comparison || []).filter(r => r.financial_year === 'FY25');
       const tbody = document.getElementById('peer-matrix-body');
@@ -1189,7 +1176,7 @@ Ashi Jain</textarea>
       });
     }
 
-    // Tab 3: DPD — actual columns include default_rate_pct, average_bureau_score instead of regulatory_classification
+    // Tab 3: DPD
     function renderDPD() {
       const dpd = DATA.dpd_analysis || [];
       const tbody = document.getElementById('dpd-table-body');
@@ -1200,7 +1187,7 @@ Ashi Jain</textarea>
         labels.push(r.dpd_bucket);
         counts.push(r.account_count);
         const isStandard = r.dpd_bucket === '0 DPD' || r.dpd_bucket === '1-30 DPD';
-        const statusLabel = isStandard ? 'Standard Asset' : (r.dpd_bucket.includes('90') ? 'NPA / Substandard' : 'Special Mention');
+        const statusLabel = isStandard ? 'Standard Asset' : (r.dpd_bucket.includes('90') ? 'NPA / Default' : 'SMA-1 / SMA-2');
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td class="px-3 py-2 font-bold text-white">${r.dpd_bucket}</td>
@@ -1249,8 +1236,7 @@ Ashi Jain</textarea>
       document.getElementById('val-util').innerText = util + '%';
       document.getElementById('val-ltv').innerText = ltv + '%';
 
-      // Empirical coefficients from classroom regression:
-      // z = 1.85 - 0.0082 * Bureau + 0.65 * Delinq + 0.028 * DTI + 0.015 * Util + 0.012 * (LTV - 50)
+      // Empirical classroom model:
       const z = 1.85 - (0.0082 * b) + (0.65 * d) + (0.028 * dti) + (0.015 * util) + (0.012 * Math.max(0, ltv - 50));
       const pd = 1 / (1 + Math.exp(-z));
       const pd_pct = (pd * 100).toFixed(2);
@@ -1270,16 +1256,16 @@ Ashi Jain</textarea>
         badge.className = "inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 font-bold text-xs";
         badge.innerText = "Near-Prime (Medium Risk)";
         dec.className = "font-bold text-amber-400";
-        dec.innerText = "Manual Underwrite";
+        dec.innerText = "Manual Review";
       } else {
         badge.className = "inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 font-bold text-xs";
         badge.innerText = "Subprime (High Risk)";
         dec.className = "font-bold text-rose-400";
-        dec.innerText = "Decline / High Margin";
+        dec.innerText = "Decline Loan";
       }
     }
 
-    // LGD Curve — actual columns: month_post_default, cumulative_recovery_rate_pct, undiscounted_lgd_pct
+    // LGD Curve
     function renderLGD() {
       const lgd = DATA.lgd_analysis || [];
       const ctx = document.getElementById('chart-lgd-curve');
@@ -1322,7 +1308,7 @@ Ashi Jain</textarea>
       }
     }
 
-    // ECL Staging — actual columns: stage, horizon, ead_inr, scenario_pd, scenario_lgd, ecl_amount_inr
+    // ECL Staging
     function renderECL() {
       const ecl = DATA.ecl_scenarios || [];
       const baseEcl = ecl.filter(r => r.scenario === 'Base');
@@ -1342,7 +1328,7 @@ Ashi Jain</textarea>
       });
     }
 
-    // Tab 4: Vasicek Simulation — actual columns: unexpected_loss_irb_capital_inr, standardized_capital_requirement_inr, irb_capital_ratio_pct
+    // Tab 4: Vasicek Table
     function renderVasicekTable() {
       const ul = DATA.unexpected_loss || [];
       const tbody = document.getElementById('vasicek-table-body');
@@ -1404,8 +1390,7 @@ Ashi Jain</textarea>
     function updateVasicekSim() {
       const rho = parseFloat(document.getElementById('input-rho').value);
       document.getElementById('val-rho').innerText = rho.toFixed(2);
-      // Scaling factor roughly based on Vasicek conditional default rate expansion
-      const baseCap = 93.36; // Standardized
+      const baseCap = 93.36;
       const scale = 1 + (rho - 0.04) * 4.2;
       const simCap = (baseCap * scale).toFixed(2);
       const delta = (((simCap / baseCap) - 1) * 100).toFixed(1);
@@ -1413,10 +1398,8 @@ Ashi Jain</textarea>
       document.getElementById('vasicek-sim-delta').innerText = `+${delta}% above Standardized`;
     }
 
-    // Tab 5: VaR & Backtesting — actual columns from var_results & market_risk_metrics CSVs
+    // Tab 5: VaR & Backtesting
     function renderVaR() {
-      // var_results has: param_var_99_1d_pct, hist_var_99_1d_pct, mc_var_99_1d_pct, expected_shortfall_99_1d_pct
-      // market_risk_metrics has: annualized_return_pct, annualized_volatility_pct, maximum_drawdown_pct, sharpe_ratio
       const varData = DATA.var_results || [];
       const mktData = DATA.market_risk_metrics || [];
       const tbody = document.getElementById('var-table-body');
@@ -1439,7 +1422,6 @@ Ashi Jain</textarea>
         tbody.appendChild(tr);
       });
 
-      // VaR vs ES Chart
       const ctx = document.getElementById('chart-var-es');
       if (ctx) {
         const instrs = varData.map(r => r.instrument);
@@ -1467,7 +1449,6 @@ Ashi Jain</textarea>
       }
     }
 
-    // Backtesting — actual columns: failure_rate_99pct, kupiec_lr_stat_99pct, kupiec_p_value_99pct
     function renderBacktesting() {
       const bt = DATA.var_backtesting || [];
       const tbody = document.getElementById('backtesting-table-body');
@@ -1490,8 +1471,7 @@ Ashi Jain</textarea>
       });
     }
 
-    // Tab 6: Events — actual columns: announcement_date (not event_date), no icici_car_3d/bajaj_car_3d/market_impact in event_database
-    // Those CARs come from event_study_results
+    // Tab 6: Events
     let eventChartInstance = null;
     function renderEvents() {
       const events = DATA.event_database || [];
@@ -1505,7 +1485,6 @@ Ashi Jain</textarea>
         sel.appendChild(opt);
       });
 
-      // Table — pull ICICI & Bajaj CARs from event_study_results
       const tbody = document.getElementById('event-table-body');
       tbody.innerHTML = '';
       events.forEach(e => {
@@ -1551,7 +1530,7 @@ Ashi Jain</textarea>
             </div>
             <h3 class="text-xl font-bold text-white mt-1">${ev.event_name}</h3>
             <p class="text-xs text-slate-300 mt-2 max-w-3xl leading-relaxed">${ev.description}</p>
-            <p class="text-xs text-slate-500 mt-1 italic">${ev.risk_transmission_channel || ''}</p>
+            <p class="text-xs text-slate-400 mt-1.5 italic">${ev.risk_transmission_channel || ''}</p>
           </div>
           <div class="flex sm:flex-col gap-2 text-right">
             <div class="bg-slate-900/90 px-3 py-2 rounded-lg border border-slate-800">
@@ -1566,7 +1545,6 @@ Ashi Jain</textarea>
         </div>
       `;
 
-      // Chart — use actual column names car_minus1_plus1_pct and car_minus5_plus5_pct
       const labels = evResults.map(r => r.institution);
       const car3 = evResults.map(r => r.car_minus1_plus1_pct);
       const car11 = evResults.map(r => r.car_minus5_plus5_pct);
@@ -1596,284 +1574,6 @@ Ashi Jain</textarea>
           }
         });
       }
-    }
-
-    // Tab 7: Hypotheses — actual columns: decision (not statistical_decision), test_statistic (not test_statistic_value), financial_interpretation (not economic_interpretation)
-    function renderHypotheses() {
-      const hyps = DATA.hypothesis_testing || [];
-      const container = document.getElementById('hypotheses-cards-container');
-      container.innerHTML = '';
-      hyps.forEach(h => {
-        const card = document.createElement('div');
-        card.className = "glass-card rounded-xl p-5 border-l-4 border-indigo-500 space-y-2";
-        card.innerHTML = `
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <h4 class="text-base font-bold text-white flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-xs font-mono font-bold">${h.hypothesis_id}</span>
-              <span>${h.hypothesis_title}</span>
-            </h4>
-            <div class="flex items-center space-x-2">
-              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-bold text-xs">${h.decision}</span>
-              <span class="text-xs text-slate-400 font-mono">p = ${h.p_value}</span>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-slate-900/70 p-3 rounded-lg border border-slate-800">
-            <div>
-              <span class="text-slate-500 uppercase text-[10px] block font-bold">Null Hypothesis (H0)</span>
-              <p class="text-slate-300">${h.null_hypothesis}</p>
-            </div>
-            <div>
-              <span class="text-indigo-400 uppercase text-[10px] block font-bold">Alternative Hypothesis (H1)</span>
-              <p class="text-slate-200">${h.alternative_hypothesis}</p>
-            </div>
-          </div>
-          <div class="text-xs text-slate-400 pt-1 space-y-1">
-            <div>Test: <strong class="text-slate-200">${h.statistical_test_type}</strong> &nbsp;|&nbsp; Statistic: <strong class="text-slate-200">${h.test_statistic}</strong> &nbsp;|&nbsp; Sample n = ${h.sample_size_n}</div>
-            <div class="text-slate-300 italic">${h.financial_interpretation}</div>
-            <div class="text-[11px] text-slate-500">Effect Size / Coefficient: ${h.effect_size_or_coefficient || '—'}</div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Tab 8: Presentation Mode Slides
-    const SLIDES = [
-      {
-        title: "1. Capstone Introduction & Strategic Scope",
-        subtitle: "ICICI Bank vs Bajaj Finance (FY2015 – FY2025)",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <p><strong>Primary Objective:</strong> Evaluate structural asset quality evolution, retail credit vulnerability, tail market risk, and capital adequacy under Basel III / Ind AS across an 11-year cycle spanning major economic shocks.</p>
-            <div class="grid grid-cols-2 gap-4 my-4">
-              <div class="p-4 rounded-xl bg-slate-900/90 border border-blue-500/40">
-                <h5 class="font-bold text-blue-400 text-base mb-1">ICICI Bank (Private Bank)</h5>
-                <ul class="list-disc list-inside space-y-1 text-xs text-slate-300">
-                  <li>Total Advances: ₹13.30 Lakh Cr</li>
-                  <li>Post-FY18 NPA Cleanup: GNPA fell from 8.84% to 1.96%</li>
-                  <li>Retailization pivot: Mortgages + Auto + Personal</li>
-                  <li>High PCR buffer: 81.4%</li>
-                </ul>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900/90 border border-orange-500/40">
-                <h5 class="font-bold text-orange-400 text-base mb-1">Bajaj Finance (Upper-Layer NBFC)</h5>
-                <ul class="list-disc list-inside space-y-1 text-xs text-slate-300">
-                  <li>AUM: ₹3.95 Lakh Cr (31.4% 10-Yr CAGR)</li>
-                  <li>Superlative asset quality: Stage 3 GNPA at 0.86%</li>
-                  <li>Omnichannel cross-sell & friction-free B2C lending</li>
-                  <li>High Tier-1 capital ratio: 21.4%</li>
-                </ul>
-              </div>
-            </div>
-            <p class="text-xs text-slate-400"><strong>Faculty Evaluator:</strong> Prof. Priyadarshi Dutta | Course: Financial Risk Analytics</p>
-          </div>
-        `
-      },
-      {
-        title: "2. Asset Quality Evolution & De-risking Trajectory",
-        subtitle: "How ICICI and Bajaj navigated the NPA Cycle",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <p>The 11-year empirical record reveals two distinct balance sheet architectures facing divergent credit cycle headwinds:</p>
-            <div class="space-y-3 text-xs">
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-emerald-400 font-bold">1. Corporate Cleanup (FY16–FY19):</span> ICICI Bank absorbed massive asset quality review (AQR) recognitions, pushing GNPA to 8.84% (FY18). Aggressive write-offs, NCLT resolution, and PCR escalation to 81.4% created an impregnable buffer.
-              </div>
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-indigo-400 font-bold">2. NBFC Liquidity & Pandemic Stress (FY19–FY21):</span> Bajaj Finance weathered IL&FS contagion and COVID lockdowns with peak GNPA of only 1.79%, supported by dynamic credit filters, accelerated write-offs, and swift collections.
-              </div>
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-rose-400 font-bold">3. Retailization Convergence (FY24–FY25):</span> Rising delinquency in small-ticket unsecured personal loans prompted RBI's 25% risk weight hike, impacting NBFC capital consumption and margins.
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "3. Credit Risk Analytics: DPD, PD & LGD",
-        subtitle: "Classroom Econometric Model & 36-Month Recovery Vintages",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <p>Direct implementation of classroom risk models using customer-level and default cohort data:</p>
-            <div class="grid grid-cols-3 gap-3 text-xs text-center">
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block">Logistic Model ROC-AUC</span>
-                <span class="text-2xl font-bold text-emerald-400 my-1 block">0.8597</span>
-                <span class="text-[11px] text-slate-500">Gini: 71.95% | KS: 56.4%</span>
-              </div>
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block">Terminal Recovery (36M)</span>
-                <span class="text-2xl font-bold text-indigo-400 my-1 block">32.82%</span>
-                <span class="text-[11px] text-slate-500">Nominal LGD: 67.18%</span>
-              </div>
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block">Discounted LGD (12%)</span>
-                <span class="text-2xl font-bold text-rose-400 my-1 block">73.65%</span>
-                <span class="text-[11px] text-slate-500">Economic Hurdle Cost</span>
-              </div>
-            </div>
-            <p class="text-xs text-slate-400 mt-2">
-              <strong>Key Finding:</strong> Significant recovery front-loading occurs in months 1–12 (24.5% cumulative), after which the marginal recovery rate decays sharply to < 0.25% per month, confirming the academic thesis on distressed asset aging.
-            </p>
-          </div>
-        `
-      },
-      {
-        title: "4. Unexpected Loss & Vasicek IRB Capital",
-        subtitle: "ASRF Regulatory Capital vs Standardized Approach",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <p>Under the Basel III Vasicek asymptotic single-risk factor model at the 99.9% confidence interval:</p>
-            <ul class="list-disc list-inside space-y-2 text-xs">
-              <li><strong>Portfolio EAD:</strong> ₹1,000 Cr illustrative loan portfolio across Retail, QRRE, Corporate, and NBFC exposures.</li>
-              <li><strong>Expected Loss (EL):</strong> ₹15.82 Cr (covered by accounting provisions).</li>
-              <li><strong>Unexpected Loss / IRB Capital:</strong> ₹133.86 Cr at standard asset correlation ρ = 0.10.</li>
-              <li><strong>Standardized Capital:</strong> ₹93.36 Cr (8% standardized charge).</li>
-              <li><strong>Capital Wedge:</strong> IRB requires <strong>+43.4% higher capital</strong> than Standardized rules for higher-risk unsecured tranches, demonstrating that simplified standardized weights understate extreme tail solvency risk.</li>
-            </ul>
-          </div>
-        `
-      },
-      {
-        title: "5. Market Risk, Value at Risk & Kupiec Backtesting",
-        subtitle: "2,711 Daily Returns Analysis & Basel Green Zone Validation",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <p>Risk metrics evaluated across 11 instruments over 10 calendar years (FY15–FY25):</p>
-            <div class="grid grid-cols-2 gap-4 text-xs">
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="font-bold text-white block mb-1">Tail Risk Metrics (99% 1-Day):</span>
-                <p>• ICICI Bank VaR: <strong>2.68%</strong> | Expected Shortfall: <strong>3.74%</strong></p>
-                <p>• Bajaj Finance VaR: <strong>3.32%</strong> | Expected Shortfall: <strong>4.82%</strong></p>
-                <p>• NBFCs exhibit consistently higher tail volatility than large private banks.</p>
-              </div>
-              <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-                <span class="font-bold text-emerald-400 block mb-1">Kupiec POF Backtesting Status:</span>
-                <p>• 250 Trading Days Evaluated (Expected Exceptions: 2.5)</p>
-                <p>• ICICI Bank: 2 Exceptions (p = 0.742)</p>
-                <p>• Bajaj Finance: 3 Exceptions (p = 0.758)</p>
-                <p>• <strong>Verdict:</strong> All 8 institutions comfortably reside in the <strong>Basel Green Zone (N ≤ 4)</strong>.</p>
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "6. Event Study: 15 Macro & Financial Shocks",
-        subtitle: "Market Model CAR[-1,+1], CAR[-5,+5], and CAR[-5,+10]",
-        content: `
-          <div class="space-y-3 text-xs text-slate-300">
-            <p class="text-sm">We evaluated 15 verified historical shocks from Demonetization (Nov 2016) to RBI Unsecured Risk Weight Hike (Nov 2023):</p>
-            <div class="space-y-2">
-              <div class="p-2.5 bg-slate-900 rounded border border-slate-800 flex justify-between items-center">
-                <span><strong>IL&FS Crisis (Sep 2018):</strong> NBFC refinancing freeze</span>
-                <span class="text-rose-400 font-bold font-mono">Bajaj CAR[-5,+5]: -12.4%</span>
-              </div>
-              <div class="p-2.5 bg-slate-900 rounded border border-slate-800 flex justify-between items-center">
-                <span><strong>COVID-19 Lockdown (Mar 2020):</strong> Severe systemic liquidity crunch</span>
-                <span class="text-rose-400 font-bold font-mono">ICICI CAR[-5,+5]: -21.8%</span>
-              </div>
-              <div class="p-2.5 bg-slate-900 rounded border border-slate-800 flex justify-between items-center">
-                <span><strong>RBI Unsecured Risk Weight Hike (Nov 2023):</strong> Direct regulatory intervention</span>
-                <span class="text-rose-400 font-bold font-mono">Bajaj CAR[-1,+1]: -4.85%</span>
-              </div>
-            </div>
-            <p class="text-slate-400 mt-2">
-              <strong>Systematic Risk Finding:</strong> During crisis regimes, systematic market beta accounts for 68.4% of total stock return variance, versus only 38.2% during normal periods.
-            </p>
-          </div>
-        `
-      },
-      {
-        title: "7. Strategic Takeaways & Risk Governance",
-        subtitle: "Managerial Recommendations for Banks and NBFCs",
-        content: `
-          <div class="space-y-4 text-sm text-slate-300">
-            <div class="grid grid-cols-2 gap-4 text-xs">
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                <h5 class="font-bold text-indigo-400 text-sm">For Universal Banks (ICICI Model):</h5>
-                <p>1. Maintain counter-cyclical PCR buffers > 80% during economic expansions.</p>
-                <p>2. Expand retail granularity to limit single-borrower concentration shocks.</p>
-                <p>3. Transition internal capital planning to full Advanced IRB models.</p>
-              </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                <h5 class="font-bold text-orange-400 text-sm">For Upper-Layer NBFCs (Bajaj Model):</h5>
-                <p>1. Diversify liabilities to reduce sensitivity to bank credit lines.</p>
-                <p>2. Preemptively calibrate risk weights on unsecured consumption loans.</p>
-                <p>3. Embed dynamic collections scoring in first 90 days of vintage.</p>
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "8. Conclusion & Academic Sign-off",
-        subtitle: "Financial Risk Analytics Capstone Defense",
-        content: `
-          <div class="space-y-4 text-center py-6">
-            <div class="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center mx-auto text-3xl font-black">
-              Ω
-            </div>
-            <h4 class="text-2xl font-bold text-white">Project Completed Successfully</h4>
-            <p class="text-sm text-slate-300 max-w-xl mx-auto">
-              Delivered complete empirical analytics, 28 website-ready datasets, 26-sheet Master Excel workbook, and interactive web risk engine meeting all academic benchmarks.
-            </p>
-            <div class="flex justify-center items-center space-x-6 text-xs text-slate-400 pt-4 border-t border-slate-800 max-w-xl mx-auto">
-              <span>Section B</span>
-              <span>•</span>
-              <span>Group 3</span>
-              <span>•</span>
-              <span>Members: Nishnat, Snehasish, Virag, Priti, Ashi</span>
-            </div>
-          </div>
-        `
-      }
-    ];
-
-    let currentSlide = 0;
-    function renderSlide(idx) {
-      currentSlide = idx;
-      if (currentSlide < 0) currentSlide = 0;
-      if (currentSlide >= SLIDES.length) currentSlide = SLIDES.length - 1;
-
-      document.getElementById('slide-indicator').innerText = `Slide ${currentSlide + 1} of ${SLIDES.length}`;
-      const s = SLIDES[currentSlide];
-      const box = document.getElementById('slide-content-box');
-      box.innerHTML = `
-        <div>
-          <div class="border-b border-slate-800 pb-3 mb-4">
-            <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">${s.subtitle}</span>
-            <h3 class="text-2xl font-extrabold text-white mt-0.5">${s.title}</h3>
-          </div>
-          <div>${s.content}</div>
-        </div>
-        <div class="flex justify-between items-center text-xs text-slate-500 pt-4 border-t border-slate-800/80 mt-6">
-          <span>FRA Oral Defense Deck</span>
-          <span>Press Next / Prev to navigate</span>
-        </div>
-      `;
-    }
-
-    function nextSlide() { renderSlide(currentSlide + 1); }
-    function prevSlide() { renderSlide(currentSlide - 1); }
-
-    // Tab 9: Downloads
-    function renderDownloads() {
-      const container = document.getElementById('csv-download-list');
-      container.innerHTML = '';
-      const csvKeys = Object.keys(DATA);
-      csvKeys.forEach(k => {
-        const item = document.createElement('a');
-        item.href = `data/${k}.csv`;
-        item.download = `${k}.csv`;
-        item.className = "p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 hover:bg-slate-900 text-slate-300 hover:text-white transition flex items-center justify-between";
-        item.innerHTML = `
-          <span class="font-mono truncate mr-2">${k}.csv</span>
-          <i data-lucide="download" class="w-3.5 h-3.5 text-slate-500"></i>
-        `;
-        container.appendChild(item);
-      });
-      lucide.createIcons();
     }
   </script>
 </body>
