@@ -1,0 +1,25 @@
+regime,institution,category,beta_to_market,total_annualized_vol_pct,systematic_annualized_vol_pct,idiosyncratic_annualized_vol_pct,systematic_risk_share_pct,idiosyncratic_risk_share_pct,r_squared,observations
+Full Period (2014-2025),ICICI Bank,Bank,1.354,30.94,22.08,21.68,50.93,49.07,0.509,2710
+Full Period (2014-2025),HDFC Bank,Bank,0.995,22.38,16.22,15.43,52.52,47.48,0.525,2710
+Full Period (2014-2025),Axis Bank,Bank,1.347,33.06,21.96,24.72,44.13,55.87,0.441,2710
+Full Period (2014-2025),Kotak Mahindra Bank,Bank,1.013,26.46,16.52,20.68,38.95,61.05,0.39,2710
+Full Period (2014-2025),Bajaj Finance,NBFC,1.297,36.08,21.15,29.24,34.37,65.63,0.344,2710
+Full Period (2014-2025),Shriram Finance,NBFC,1.375,43.0,22.41,36.71,27.16,72.84,0.272,2710
+Full Period (2014-2025),Cholamandalam Finance,NBFC,1.219,40.03,19.88,34.76,24.66,75.34,0.247,2710
+Full Period (2014-2025),Mahindra Finance,NBFC,1.372,40.92,22.38,34.27,29.9,70.1,0.299,2710
+Crisis Periods (COVID & IL&FS),ICICI Bank,Bank,1.415,47.36,38.45,27.69,65.92,34.08,0.659,367
+Crisis Periods (COVID & IL&FS),HDFC Bank,Bank,1.042,35.21,28.32,20.95,64.7,35.3,0.647,367
+Crisis Periods (COVID & IL&FS),Axis Bank,Bank,1.531,54.79,41.59,35.72,57.62,42.38,0.576,367
+Crisis Periods (COVID & IL&FS),Kotak Mahindra Bank,Bank,1.085,41.39,29.49,29.08,50.76,49.24,0.508,367
+Crisis Periods (COVID & IL&FS),Bajaj Finance,NBFC,1.499,56.4,40.74,39.06,52.18,47.82,0.522,367
+Crisis Periods (COVID & IL&FS),Shriram Finance,NBFC,1.571,69.15,42.68,54.48,38.09,61.91,0.381,367
+Crisis Periods (COVID & IL&FS),Cholamandalam Finance,NBFC,1.591,65.6,43.24,49.4,43.45,56.55,0.434,367
+Crisis Periods (COVID & IL&FS),Mahindra Finance,NBFC,1.479,62.98,40.19,48.56,40.72,59.28,0.407,367
+Normal Calm Periods,ICICI Bank,Bank,1.318,27.51,18.26,20.58,44.07,55.93,0.441,2343
+Normal Calm Periods,HDFC Bank,Bank,0.967,19.64,13.4,14.37,46.51,53.49,0.465,2343
+Normal Calm Periods,Axis Bank,Bank,1.237,28.2,17.14,22.4,36.95,63.05,0.37,2343
+Normal Calm Periods,Kotak Mahindra Bank,Bank,0.97,23.29,13.44,19.02,33.3,66.7,0.333,2343
+Normal Calm Periods,Bajaj Finance,NBFC,1.176,31.76,16.3,27.27,26.34,73.66,0.263,2343
+Normal Calm Periods,Shriram Finance,NBFC,1.257,37.31,17.42,33.0,21.8,78.2,0.218,2343
+Normal Calm Periods,Cholamandalam Finance,NBFC,0.996,34.37,13.8,31.48,16.13,83.87,0.161,2343
+Normal Calm Periods,Mahindra Finance,NBFC,1.308,36.29,18.13,31.44,24.97,75.03,0.25,2343
