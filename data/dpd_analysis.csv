@@ -1,0 +1,7 @@
+dpd_bucket,account_count,account_share_pct,outstanding_balance_inr,balance_share_pct,defaulted_accounts_count,default_rate_pct,average_balance_inr,average_bureau_score,average_foir_pct
+0 DPD,4272,85.44,786990680,84.51,90,2.11,184220.66,735.5,39.09
+1-30 DPD,433,8.66,86703929,9.31,39,9.01,200240.02,691.7,42.11
+31-60 DPD,182,3.64,34883994,3.75,61,33.52,191670.3,666.2,43.36
+61-89 DPD,113,2.26,22631414,2.43,65,57.52,200278.0,643.7,45.1
+30+ DPD (Total Delinquent),295,5.9,57515408,6.18,126,42.71,194967.48,657.5,44.03
+60+ DPD (Severe Delinquent),113,2.26,22631414,2.43,65,57.52,200278.0,643.7,45.1
