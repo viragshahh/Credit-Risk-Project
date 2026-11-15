@@ -252,7 +252,7 @@
             <div>
               <div class="flex items-center space-x-2">
                 <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-300 tracking-wider uppercase">Upper-Layer NBFC</span>
-                <span class="text-xs text-slate-500 font-mono">NSE: BAJAJFINSV</span>
+                <span class="text-xs text-slate-500 font-mono">NSE: BAJFINANCE</span>
               </div>
               <h3 class="text-xl font-bold text-white mt-1">Bajaj Finance Limited</h3>
               <p class="text-xs text-slate-400">Benchmarked vs Shriram Finance, Cholamandalam, Mahindra Finance</p>
@@ -367,10 +367,10 @@
               <option value="KOTAKBANK">Kotak Mahindra Bank</option>
             </optgroup>
             <optgroup label="Upper-Layer NBFCs">
-              <option value="BAJAJFINSV">Bajaj Finance (Primary)</option>
+              <option value="BAJFINANCE">Bajaj Finance (Primary)</option>
               <option value="SHRIRAMFIN">Shriram Finance</option>
               <option value="CHOLAFIN">Cholamandalam Finance</option>
-              <option value="MMFS">Mahindra Finance</option>
+              <option value="M&MFIN">Mahindra Finance</option>
             </optgroup>
           </select>
           <button onclick="resetCompanySelector()" title="Restore Benchmark to ICICI Bank" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs flex items-center space-x-1 border border-slate-700 transition">
@@ -1199,20 +1199,25 @@
       const tbody = document.getElementById('company-financials-body');
       tbody.innerHTML = '';
       history.forEach(r => {
-        const advAum = r.advances || r.aum || 0;
+        const advAum = (r.advances != null ? r.advances : (r.aum != null ? r.aum : 0));
+        const gnpaPct = r.gnpa_pct != null ? `${r.gnpa_pct}%` : '—';
+        const nnpaPct = r.nnpa_pct != null ? `${r.nnpa_pct}%` : '—';
+        const pcrPct = r.pcr_pct != null ? `${r.pcr_pct}%` : '—';
+        const crarPct = r.crar_pct != null ? `${r.crar_pct}%` : '—';
+        const tier1Pct = r.tier1_pct != null ? `${r.tier1_pct}%` : '—';
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-900/40 transition";
         tr.innerHTML = `
-          <td class="px-3 py-2 font-bold text-white">${r.financial_year}</td>
+          <td class="px-3 py-2 font-bold text-white">${r.financial_year || '—'}</td>
           <td class="px-3 py-2 font-mono">${(r.total_assets || 0).toLocaleString()}</td>
           <td class="px-3 py-2 font-mono">${advAum.toLocaleString()}</td>
           <td class="px-3 py-2 font-mono text-emerald-400">${(r.pat || 0).toLocaleString()}</td>
           <td class="px-3 py-2 font-mono">${(r.gnpa_amount || 0).toLocaleString()}</td>
-          <td class="px-3 py-2 font-bold ${r.gnpa_pct > 5 ? 'text-rose-400' : 'text-emerald-400'}">${r.gnpa_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.nnpa_pct}%</td>
-          <td class="px-3 py-2 font-mono text-indigo-400">${r.pcr_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.crar_pct}%</td>
-          <td class="px-3 py-2 font-mono">${r.tier1_pct}%</td>
+          <td class="px-3 py-2 font-bold ${r.gnpa_pct > 5 ? 'text-rose-400' : 'text-emerald-400'}">${gnpaPct}</td>
+          <td class="px-3 py-2 font-mono">${nnpaPct}</td>
+          <td class="px-3 py-2 font-mono text-indigo-400">${pcrPct}</td>
+          <td class="px-3 py-2 font-mono">${crarPct}</td>
+          <td class="px-3 py-2 font-mono">${tier1Pct}</td>
         `;
         tbody.appendChild(tr);
       });
