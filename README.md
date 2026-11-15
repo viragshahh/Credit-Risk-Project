@@ -6,7 +6,7 @@
 **Group**: Group 3  
 
 ### Group Members:
-1. **Nishnat Kothari**
+1. **Nishant Kothari**
 2. **Snehasish Samantaray**
 3. **Virag Shah**
 4. **Priti Jogani**
